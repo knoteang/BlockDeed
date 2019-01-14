@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>My Wallet</title>
+
+
+<link href="resource/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="resource/bootstrap/css/custom.css" rel="stylesheet">
+<script src="resource/bootstrap/js/jquery.min.js"></script>
+<script src="resource/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- ================================================== Begin coding  ================================================== -->
+
+        <script src="web3.js"></script>
+        <script type="text/javascript">
+            var Web3 = require('web3');
+            var web3 = new Web3();
+
+            // 1. Connect to the node
+            web3.setProvider(new web3.providers.HttpProvider('http://localhost:3917'));
+
+            // 2. Check node status
+            function checkStatus(){
+                if(web3.isConnected()){
+                    document.getElementById('node_status').innerHTML =  "TRUE";
+                }else{
+                    document.getElementById('node_status').innerHTML =  "FALSE";
+                }
+            }
+
+            // 3. Get coinbase address
+            web3.eth.getCoinbase(function(error, result){
+                document.getElementById('wallet_address').innerHTML =  result;
+            });
+
+            // 4. Get balance from address
+            web3.eth.getBalance(web3.eth.coinbase, function(error, result){
+                document.getElementById('wallet_balance').innerHTML =  (result/10e17) + ' ether';
+            });
+
+            // 5. Get list of the accounts
+            function getListAccount(){
+                var accounts = web3.eth.accounts;
+                var accountList = '';
+                for (i = 0; i < accounts.length; i++) {
+                    accountList += '<li>' + accounts[i] + '</li>';
+                }
+                document.getElementById('getListAccountResult').innerHTML = '<ol>' + accountList + '</ol>';
+            }
+
+            // 6. Send ether and data
+            function sendEther(){
+                var to = document.getElementById('send_to').value;
+                var amount = document.getElementById('send_amount').value;
+                var data = document.getElementById('send_data').value;
+
+                var params = {
+                        from: web3.eth.coinbase,
+                        to: to,
+                        value: web3.toWei(amount, "ether"),
+                        data: web3.toHex(data)
+                    };
+
+                web3.eth.sendTransaction(params , function (error, result) {
+                    if(!error){
+                        document.getElementById('send_output').innerHTML =  result;
+                    }else{
+                        document.getElementById('send_output').innerHTML =  error;
+                    }
+                });
+            }
+
+            // 7. Get block information
+            function getBlock() {
+                var blockNumber = document.getElementById('getBlockQuery').value;
+                web3.eth.getBlock(blockNumber, function (error, result) {
+                    if (!error){
+                        var str = '';
+                        for(var key in result){
+                            str += '<tr><td>' + key + '</td><td style="text-align:left;">' + JSON.stringify(result[key]) + '</td></tr>';
+                        }
+                        document.getElementById('getBlockResult').innerHTML = '<table border="1">' + str + '</table>';
+                    } else{
+                        document.getElementById('getBlockResult').innerHTML = error;
+                    }
+                });
+            }
+
+            // 8. Get transaction information
+            function getTransaction() {
+                var txHash = document.getElementById('getTransactionQuery').value;
+                web3.eth.getTransaction(txHash, function(error, result){
+                    if (!error){
+                        var str = '';
+                        for(var key in result){
+                            str += '<tr><td>' + key + '</td><td style="text-align:left;">' +JSON.stringify(result[key]) + '</td></tr>';
+                        }
+                        document.getElementById('getTransactionResult').innerHTML = '<table border="1">' + str + '</table>';
+                    } else{
+                        document.getElementById('getTransactionResult').innerHTML = error;
+                    }
+                });
+            }
+
+
+
+
+            /*
+            * The code below is used for interaction with the smart contract
+            */
+
+            // Assign the account for action to smart contract
+            web3.eth.defaultAccount = web3.eth.coinbase;
+            // The ABI of the contract
+            var abiArray = [ { "constant": false, "inputs": [ { "name": "value", "type": "uint256" } ], "name": "withdraw", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [ { "name": "addr", "type": "address" }, { "name": "value", "type": "uint256" } ], "name": "forceSendEth", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [], "name": "reportTotalDepositAmount", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [ { "name": "addr", "type": "address" }, { "name": "value", "type": "uint256" } ], "name": "adjustBalance", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [], "name": "destroy", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [], "name": "deposite", "outputs": [], "payable": true, "type": "function" }, { "constant": false, "inputs": [], "name": "checkBalance", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [], "name": "reportTotalAccount", "outputs": [], "payable": false, "type": "function" }, { "constant": false, "inputs": [], "name": "reportListAccount", "outputs": [], "payable": false, "type": "function" }, { "inputs": [], "payable": false, "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "account", "type": "address" }, { "indexed": false, "name": "balance", "type": "uint256" } ], "name": "print_account", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "val", "type": "string" } ], "name": "print_string", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "val", "type": "uint256" } ], "name": "print_uint", "type": "event" } ];
+            var contract = web3.eth.contract(abiArray);
+
+            // The address of the contract
+            var contractAddress = '0x44ABDB51f5A14E8f1DD93ADCe0d37bFb04Ae0AD0';
+            var contractInstance = contract.at(contractAddress);
+
+            // Check balance
+            function checkEtherInBank(){
+                contractInstance.checkBalance();
+
+                var filter = contractInstance.print_uint(function (error, result) {
+                   if (!error) {
+                        var amount = result.args.val / 1000000000000000000;
+                        document.getElementById('checkEtherInBankResult').innerHTML = amount + ' Ether';
+                   }
+                });
+            }
+
+            // Deposit ether to smart contract
+            function depositEther(){
+                var amount = document.getElementById('depositEtherAmount').value;
+                contractInstance.deposite({value: web3.toWei(amount, "ether")});
+            }
+
+            // Withdraw ether from smart contract
+            function withdrawEther(){
+                var amount = document.getElementById('withdrawEtherAmount').value;
+                amount = amount*10e17;
+                contractInstance.withdraw(amount);
+            }
+        </script>
+
+        <!-- ================================================== End coding  ================================================== -->
+    </head>
+
+    <body style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px;">
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a>Wallet Application</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <img src="resource/img/wallet.png" width="100"/>
+                <h3>กระเป๋าเงินของฉัน</h3>
+                <h3>Address</h3>
+                <h3 style="color: red"><div id="wallet_address"></div></h3>
+                <h3>Balance</h3>
+                <h3 style="color: red"><div id="wallet_balance"></div></h3>
+            </div>
+            <div class="col-sm-6">
+                <h3>Send</h3>
+                <hr/>
+                <form class="">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="email">To</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="send_to" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="email">Amount</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="send_amount" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="email">Data Value</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="send_data" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="button" onclick="sendEther();">Send Money</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Result</label>
+                        <div class="col-sm-offset-4 col-sm-8" id="send_output"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h3>Node Connect</h3>
+                <h3 style="color: red"><div id="node_status"></div></h3>
+                <script>checkStatus();</script>
+
+                <h3>Get Block</h3>
+                <input type="text" class="form-control" id="getBlockQuery" />
+                <button type="button" onclick="getBlock();";>Get Block</button>
+                <div id="getBlockResult"></div>
+                <hr/>
+
+                <h3>Get Transaction</h3>
+                <input type="text" class="form-control" id="getTransactionQuery" />
+                <button type="button" onclick="getTransaction();";>Get Transaction</button>
+                <div id="getTransactionResult"></div>
+                <hr/>
+
+                <h3>List Account</h3>
+                <button type="button" onclick="getListAccount();";>List Account</button>
+                <div id="getListAccountResult"></div>
+                <hr/>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>เงินในบัญชีธนาคาร</h3>
+                <hr/>
+                <button type="button" onclick="checkEtherInBank();">ตรวจสอบ</button>
+                <div id="checkEtherInBankResult"></div>
+            </div>
+            <div class="col-sm-4">
+                <h3>ฝากเงิน</h3>
+                <hr/>
+                <form class="">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="email">Amount</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="depositEtherAmount" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="button" onclick="depositEther();">ฝากเงิน</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <h3>ถอนเงิน</h3>
+                <hr/>
+                <form class="">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="email">Amount</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="withdrawEtherAmount" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="button" onclick="withdrawEther();">ถอนเงิน</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

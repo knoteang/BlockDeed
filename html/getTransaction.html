@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Test Create Deed</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="content-language" content="th" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<script src="web3.js"></script>
+	<script src="connectC.js"></script>
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="createDeed.html">Create Deed<span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="getDeed.html">Get Deed</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="saveTransaction.html">Save Transaction</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="endTransaction.html">End Transaction</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="getTransaction.html">Get Transaction</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="checkContract.html">Check Contract</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<br>
+	<div class="container-fluid">
+		<div class="container  bg-light">
+
+				<form>
+				 	<div class="form-group col-md-11"><br><h2>Get Transaction</h2></div>
+					 <div class="form-row justify-content-center">
+
+					    <div class="col-md-5 my-1">
+					      <div class="input-group">
+					        <div class="input-group-prepend">
+					          <div class="input-group-text">Document Number</div>
+					        </div>
+					        <input type="text" class="form-control" id="GTdocumentNumber" placeholder="Document No.">
+					      </div>
+					    </div>
+
+					    <div class="form-group col-auto my-1">
+					      <button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Get Transaction</button>
+					    </div>
+					    <div class="form-group container col-md-10"></div>
+					    <hr>
+
+					 </div>
+
+				</form>
+
+				<form id="formGetTransaction">
+					<div class="form-group container"><br><h2>Transaction(สารบัญจดทะเบียน)</h2></div>
+					<div class="row justify-content-start">
+						    <div class="form-group container col-md-5">
+						  	  <label for="transactionNumber">Transaction Number</label>
+						      <input type="text" readonly class="form-control" id="GTtransactionNumber" placeholder="Transaction Number">
+						    </div>
+						    <div class="form-group container col-md-5">
+						      <label for="documentNumber">Document Number</label>
+						      <input type="text" readonly class="form-control" id="GTdocumentNumber" placeholder="Document Number">
+						    </div>
+					</div><hr>
+					<div class="row justify-content-start">
+					  	<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
+					</div>
+					<div class="row justify-content-start">
+						    <div class="form-group container col-md-5">
+						  	  <label for="dateToRegistered">วันที่จดทะเบียน</label>
+						      <input type="date" readonly class="form-control" id="GTdateToRegistered" placeholder="วันที่จดทะเบียน">
+						    </div>
+						    <div class="form-group container col-md-5">
+						      <label for="typeOfRegistered">ประเภทการจดทะเบียน</label>
+						      <input type="text" readonly class="form-control" id="GTtypeOfRegistered" placeholder="ประเภทการจดทะเบียน">
+						    </div>
+						    <div class="form-group container col-md-5">
+						  	  <label for="nameGiver">ผู้ให้สัญญา</label>
+						      <input type="text" readonly class="form-control" id="GTnameGiver" placeholder="ชื่อ-นามสกุล">
+						    </div>
+						    <div class="form-group container col-md-5">
+						      <label for="nameReceiver">ผู้รับสัญญา</label>
+						      <input type="text" readonly class="form-control" id="GTnameReceiver" placeholder="ชื่อ-นามสกุล">
+						    </div>
+						    <div class="form-group container col-md-5">
+						  	  <label for="estateContract">เนื้อที่ดินตามสัญญา</label>
+						      <input type="text" readonly class="form-control" id="GTestateContract" placeholder="ไร่,งาน,ตารางวา">
+						    </div>
+						    <div class="form-group container col-md-5">
+						      <label for="estateRemain">เนื้อที่ดินคงเหลือ</label>
+						      <input type="text" readonly class="form-control" id="GTestateRemain" placeholder="ไร่,งาน,ตารางวา">
+						    </div>
+					</div><br>
+
+				</form>
+
+		</div>
+	</div>
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <form>
+		          <div class="form-group">
+		            <label for="username" class="col-form-label">Username:</label>
+		            <input type="text" class="form-control" id="username">
+		          </div>
+		          <div class="form-group">
+		            <label for="password" class="col-form-label">Password:</label>
+		            <input type="text" class="form-control" id="password">
+		          </div>
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+		        <button type="button" id="login" class="btn btn-dark" onclick="getLastTransaction();">Login</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	    $(document).ready(function(){
+	        $("#formGetTransaction").hide();
+	        	$("#login").click(function() {
+	        	$("#closeModal").click();
+	        	$("#formGetTransaction").show();
+
+	        });
+	    });
+	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
