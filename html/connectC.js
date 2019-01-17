@@ -394,7 +394,7 @@ function sendDocument(){
     county,province,name,nationality,size);
 
   contractInstance.sendDocument(ownerAddress,section,numberOfsection,district,documentNumber,
-    county,province,firstname,nationality,size,{ gas: estimateGas },function (error, result) {
+    county,province,name,nationality,size,{ gas: estimateGas },function (error, result) {
      if (!error) {
        console.log(result);
      }else{
@@ -417,6 +417,8 @@ function getDocument(){
         document.getElementById('GdocumentNumber').value = result.args.docNo ;
         document.getElementById('Gcounty').value = result.args.county ;
         document.getElementById('Gprovince').value = result.args.province ;
+        var tmpName = result.args.name.split(" ");
+        console.log(tmpName[0]);
         document.getElementById('Gfirstname').value = result.args.name ;
         document.getElementById('Gnationality').value = result.args.nationality ;
         document.getElementById('Gsize').value = result.args.size ;
@@ -428,18 +430,17 @@ function getDocument(){
 
 function saveTransaction(){
 
-  var transactionNumber = document.getElementById('STtransactionNumber').value ;
   var documentNumber = document.getElementById('STdocumentNumber').value ;
-  //var dateToRegistered = document.getElementById('STdateToRegistered').value ;
-  var typeOfRegistered = document.getElementById('STtypeOfRegistered').value ;
-  var nameGiver = document.getElementById('STnameGiver').value ;
-  var nameReceiver = document.getElementById('STnameReceiver').value ;
-  //var estateContract = document.getElementById('STestateContract').value ;
-  //var estateRemain = document.getElementById('STestateRemain').value ;
+  var detail = document.getElementById('STdetail').value ;
+  var money = document.getElementById('STmoney').value ;
+  var puGiver = document.getElementById('STnameGiver').value ;
+  var puReceiver = document.getElementById('STnameReceiver').value ;
 
-  var estimateGas = contractInstance.saveTransaction.estimateGas(transactionNumber,documentNumber,nameGiver,nameReceiver,typeOfRegistered);
+  console.log(detail);
+
+  var estimateGas = contractInstance.saveTransaction.estimateGas(documentNumber,puGiver,puGiver,money,detail);
   //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
-  contractInstance.saveTransaction(transactionNumber,documentNumber,nameGiver,nameReceiver,typeOfRegistered,{ gas: estimateGas })
+  contractInstance.saveTransaction(documentNumber,puGiver,puGiver,money,detail,{ gas: estimateGas })
   contractInstance.print_string(function (error, result) {
      if (!error) {
         console.log(result.args.str);
