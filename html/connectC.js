@@ -381,26 +381,22 @@ var contractInstance = contract.at(contractAddress);
 function sendDocument(){
   var section = document.getElementById('Csection').value ;
   var numberOfsection = document.getElementById('CnumberOfsection').value ;
-  //var surveyPage = document.getElementById('CsurveyPage').value ;
   var district = document.getElementById('Cdistrict').value ;
   var documentNumber = document.getElementById('CdocumentNumber').value ;
-  //var bookNo = document.getElementById('CbookNo').value ;
-  //var bookPage = document.getElementById('CbookPage').value ;
   var county = document.getElementById('Ccounty').value ;
   var province = document.getElementById('Cprovince').value ;
-  var firstname = document.getElementById('Cfirstname').value ;
-  //var lastname = document.getElementById('Clastname').value ;
+  var name  = document.getElementById('Cfirstname').value + " " + document.getElementById('Clastname').value ;
   var nationality = document.getElementById('Cnationality').value ;
   var ownerAddress = document.getElementById('CownerAddress').value ;
   var size = document.getElementById('Csize').value ;
 
   var estimateGas = contractInstance.sendDocument.estimateGas(ownerAddress,section,numberOfsection,district,documentNumber,
-    county,province,firstname,nationality,size);
+    county,province,name,nationality,size);
 
   contractInstance.sendDocument(ownerAddress,section,numberOfsection,district,documentNumber,
     county,province,firstname,nationality,size,{ gas: estimateGas },function (error, result) {
      if (!error) {
-       console.log("seccess");
+       console.log(result);
      }else{
        console.log(error);
      }
@@ -417,17 +413,12 @@ function getDocument(){
         console.log(result);
         document.getElementById('Gsection').value = result.args.section ;
         document.getElementById('GnumberOfsection').value = result.args.numberOfsection ;
-        //document.getElementById('GsurveyPage').value = result.args. ;
         document.getElementById('Gdistrict').value = result.args.district ;
         document.getElementById('GdocumentNumber').value = result.args.docNo ;
-        //document.getElementById('GbookNo').value = result.args. ;
-        //document.getElementById('GbookPage').value = result.args. ;
         document.getElementById('Gcounty').value = result.args.county ;
         document.getElementById('Gprovince').value = result.args.province ;
         document.getElementById('Gfirstname').value = result.args.name ;
-        //document.getElementById('Glastname').value = result.args. ;
         document.getElementById('Gnationality').value = result.args.nationality ;
-        //document.getElementById('GownerAddress').value = result.args. ;
         document.getElementById('Gsize').value = result.args.size ;
      }else{
        console.log("error");
