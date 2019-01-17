@@ -14,6 +14,7 @@ contract Test_FullData {
         string name,
         string nationality,
         uint size);
+    event print_arrayuint(uint[] array);
 
     //โครงสร้างโฉนดที่ดิน(หน้าแรก)  ในทางปฏิบัติเลขที่โฉนดมันจะซ้ำตามอำเภอ ดังนั้นอาจจะมีการะบุkeyเพิ่ม
     struct document {
@@ -38,12 +39,16 @@ contract Test_FullData {
     struct transaction {
         uint traNo;
         //..other data
-        uint docNo;
-        address mortgage;
-        address mortgagee;
-        string detail;
+        uint docNo; // เลขที่โฉนด
+        address mortgage; // ผู้ให้จำนอง
+        address mortgagee; // ผู้รับจำนอง
+        uint money; // จำนวนเงิน
+        string detail; // เงื่อนไขการจำนอง
     }
     mapping(uint => transaction[]) public allList;
+
+
+
     //โครงสร้างโฉนดที่ดิน(หน้าหลัง)
     struct endtransaction {
         uint traNo;
@@ -79,11 +84,16 @@ contract Test_FullData {
     }
 
     //บันทึกธุรกรรมของโฉนดที่ดิน
-    function saveTransaction(uint _traNo,uint _docNo,address _mortgage,address _mortgagee,string memory _datail) public {
+    function saveTransaction(uint _docNo,address _mortgage,address _mortgagee,uint _money,string memory _datail) public {
         //require
         //ตรวจสอบความถูกต้อง
         //if(checkContract(_docNo)){
-        transaction memory newTransaction = transaction(_traNo, _docNo,  _mortgage, _mortgagee, _datail);
+        // uint _traNo=1;
+        // for(uint idx = 0; idx < allList.length; idx++){
+        //     _traNo=_traNo+allList[idx].length;
+        // }
+        uint _traNo=_docNo+allList[_docNo].length; // แก้ไข ให้ไม่ติดบัค ****
+        transaction memory newTransaction = transaction(_traNo, _docNo,  _mortgage, _mortgagee, _money, _datail);
         allList[_docNo].push(newTransaction);
         //}else{
           //  emit print_string("fail");
@@ -125,17 +135,15 @@ contract Test_FullData {
         return;
     }
 
-    function getTransaction(uint _docNo, uint _traNo) public {
+    function getTransaction(uint _docNo) public {
         //authen by user...
         //require
         transaction[] memory tmpTran = allList[_docNo];
+        uint[] memory output = new uint[](tmpTran.length);
         for(uint idx = 0; idx < tmpTran.length; idx++){
-            if(tmpTran[idx].traNo == _traNo){
-                emit print_string(tmpTran[idx].detail);
-                return;
-            }
+            output[idx] = tmpTran[idx].traNo;
         }
-        emit print_uint(tmpTran.length);
+        emit print_arrayuint(output);
         return;
     }
 
