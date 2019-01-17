@@ -9,124 +9,112 @@
 	<script src="web3.js"></script>
 	<script src="connectC.js"></script>
 
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item">
-	        <a class="nav-link" href="createDeed.html">Create Deed<span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="getDeed.html">Get Deed</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="saveTransaction.html">Save Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="endTransaction.html">End Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="getTransaction.html">Get Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="checkContract.html">Check Contract</a>
-	      </li>
-	    </ul>
-	  </div>
+		<a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="createDeed.html">Create Deed<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="getDeed.html">Get Deed</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="saveTransaction.html">Save Transaction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="endTransaction.html">End Transaction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="getTransaction.html">Get Transaction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="checkContract.html">Check Contract</a>
+				</li>
+			</ul>
+		</div>
 	</nav>
 	<br>
 	<div class="container-fluid">
 		<div class="container  bg-light">
 
-				<form id="saveTransaction">
-					<div class="form-group container"><br><h2>Save Transaction(สารบัญจดทะเบียน)</h2></div>
-					<div class="row justify-content-start">
-						    <div class="form-group container col-md-5">
-						  	  <label for="transactionNumber">Transaction Number</label>
-						      <input type="text" class="form-control" id="STtransactionNumber" placeholder="Transaction Number">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="documentNumber">Document Number</label>
-						      <input type="text" class="form-control" id="STdocumentNumber" placeholder="Document Number">
-						    </div>
-					</div><hr>
-					<div class="row justify-content-start">
-					  	<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
+			<form id="saveTransaction">
+				<div class="form-group container"><br><h2>Save Transaction(สารบัญจดทะเบียน)</h2></div>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-5">
+						<label for="documentNumber">เลขที่โฉนด</label>
+						<input type="text" class="form-control" id="STdocumentNumber" placeholder="">
 					</div>
-					<div class="row justify-content-start">
-						    <div class="form-group container col-md-5">
-						  	  <label for="dateToRegistered">วันที่จดทะเบียน</label>
-						      <input type="date" class="form-control" id="STdateToRegistered" placeholder="วันที่จดทะเบียน">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="typeOfRegistered">ประเภทการจดทะเบียน</label>
-						      <input type="text" class="form-control" id="STtypeOfRegistered" placeholder="ประเภทการจดทะเบียน">
-						    </div>
-						    <div class="form-group container col-md-5">
-						  	  <label for="nameGiver">ผู้ให้สัญญา</label>
-						      <input type="text" class="form-control" id="STnameGiver" placeholder="ชื่อ-นามสกุล">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="nameReceiver">ผู้รับสัญญา</label>
-						      <input type="text" class="form-control" id="STnameReceiver" placeholder="ชื่อ-นามสกุล">
-						    </div>
-						    <div class="form-group container col-md-5">
-						  	  <label for="estateContract">เนื้อที่ดินตามสัญญา</label>
-						      <input type="text" class="form-control" id="STestateContract" placeholder="ไร่,งาน,ตารางวา">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="estateRemain">เนื้อที่ดินคงเหลือ</label>
-						      <input type="text" class="form-control" id="STestateRemain" placeholder="ไร่,งาน,ตารางวา">
-						    </div>
-					</div><br>
-					<div class="row justify-content-center">
-					    <button type="button" id="createDeed" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Save Transaction
-					    </button><br>
-					</div><br>
-				</form>
+				</div><hr>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
+				</div>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-5">
+						<label for="nameGiver">ผู้ให้สัญญา</label>
+						<input type="text" class="form-control" id="STnameGiver" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+						<label for="nameReceiver">ผู้รับสัญญา</label>
+						<input type="text" class="form-control" id="STnameReceiver" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+						<label for="estateContract">เนื้อที่ดินตามสัญญา</label>
+						<input type="text" class="form-control" id="STestateContract" placeholder="ไร่,งาน,ตารางวา">
+					</div>
+					<div class="form-group container col-md-5">
+						<label for="estateRemain">เนื้อที่ดินคงเหลือ</label>
+						<input type="text" class="form-control" id="STestateRemain" placeholder="ไร่,งาน,ตารางวา">
+					</div>
+				</div><br>
+				<div class="row justify-content-center">
+					<button type="button" id="createDeed" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Save Transaction
+					</button><br>
+				</div><br>
+			</form>
 
 		</div>
 	</div>
 
 
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <form>
-		          <div class="form-group">
-		            <label for="username" class="col-form-label">Username:</label>
-		            <input type="text" class="form-control" id="username">
-		          </div>
-		          <div class="form-group">
-		            <label for="password" class="col-form-label">Password:</label>
-		            <input type="text" class="form-control" id="password">
-		          </div>
-		        </form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-		        <button type="button" id="login" class="btn btn-dark" onclick="saveTransaction();">Login</button>
-		      </div>
-		    </div>
-		  </div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="username" class="col-form-label">Username:</label>
+							<input type="text" class="form-control" id="username">
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-form-label">Password:</label>
+							<input type="text" class="form-control" id="password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+					<button type="button" id="login" class="btn btn-dark" onclick="saveTransaction();">Login</button>
+				</div>
+			</div>
 		</div>
+	</div>
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
