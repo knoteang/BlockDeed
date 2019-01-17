@@ -18,8 +18,8 @@ function checkStatus(){
 */
 
 // Assign the account for action to smart contract
-
 web3.eth.defaultAccount = web3.eth.accounts[9];
+
 // The ABI of the contract
 var abiArray = [
   {
@@ -375,7 +375,7 @@ var abiArray = [
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0xf0e282B1a358B99D2B18a9FBa82D6Cd2d8Bb209d';
+var contractAddress = '0x63B8e14BABab2D5a5e023F469168C2B2DF792642';
 var contractInstance = contract.at(contractAddress);
 
 function sendDocument(){
