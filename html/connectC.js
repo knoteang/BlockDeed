@@ -375,7 +375,7 @@ var abiArray = [
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0x63B8e14BABab2D5a5e023F469168C2B2DF792642';
+var contractAddress = '0xE4e92Bfb0D1DF0ce196e46744F2982866F7040Ed';
 var contractInstance = contract.at(contractAddress);
 
 function sendDocument(){
@@ -396,7 +396,7 @@ function sendDocument(){
   contractInstance.sendDocument(ownerAddress,section,numberOfsection,district,documentNumber,
     county,province,name,nationality,size,{ gas: estimateGas },function (error, result) {
      if (!error) {
-       console.log(result);
+       console.log(web3.eth.getTransaction(result);
      }else{
        console.log(error);
      }
@@ -414,12 +414,12 @@ function getDocument(){
         document.getElementById('Gsection').value = result.args.section ;
         document.getElementById('GnumberOfsection').value = result.args.numberOfsection ;
         document.getElementById('Gdistrict').value = result.args.district ;
-        document.getElementById('GdocumentNumber').value = result.args.docNo ;
+        document.getElementById('GdocumentNumberR').value = result.args.docNo ;
         document.getElementById('Gcounty').value = result.args.county ;
         document.getElementById('Gprovince').value = result.args.province ;
         var tmpName = result.args.name.split(" ");
-        console.log(tmpName[0]);
-        document.getElementById('Gfirstname').value = result.args.name ;
+        document.getElementById('Gfirstname').value = tmpName[0] ;
+        document.getElementById('Glastname').value = tmpName[1] ;
         document.getElementById('Gnationality').value = result.args.nationality ;
         document.getElementById('Gsize').value = result.args.size ;
      }else{
@@ -443,7 +443,7 @@ function saveTransaction(){
   contractInstance.saveTransaction(documentNumber,puGiver,puGiver,money,detail,{ gas: estimateGas })
   contractInstance.print_string(function (error, result) {
      if (!error) {
-        console.log(result.args.str);
+       console.log(web3.eth.getTransaction(result));
      }else{
        console.log(error);
      }
