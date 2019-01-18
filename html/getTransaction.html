@@ -9,150 +9,169 @@
 	<script src="web3.js"></script>
 	<script src="connectC.js"></script>
 
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item">
-	        <a class="nav-link" href="createDeed.html">Create Deed<span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="getDeed.html">Get Deed</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="saveTransaction.html">Save Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="endTransaction.html">End Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="getTransaction.html">Get Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="checkContract.html">Check Contract</a>
-	      </li>
-	    </ul>
-	  </div>
+		<a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="createDeed.html">Create Deed<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="getDeed.html">Get Deed</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="saveTransaction.html">Save Transaction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="endTransaction.html">End Transaction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="getTransaction.html">Get Transaction</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="checkContract.html">Check Contract</a>
+				</li>
+			</ul>
+		</div>
 	</nav>
 	<br>
 	<div class="container-fluid">
 		<div class="container  bg-light">
 
-				<form>
-				 	<div class="form-group col-md-11"><br><h2>Get Transaction</h2></div>
-					 <div class="form-row justify-content-center">
+			<form>
+				<div class="form-group col-md-11"><br><h2>Get Transaction</h2></div>
+				<div class="form-row justify-content-center">
 
-					    <div class="col-md-5 my-1">
-					      <div class="input-group">
-					        <div class="input-group-prepend">
-					          <div class="input-group-text">Document Number</div>
-					        </div>
-					        <input type="text" class="form-control" id="GTdocumentNumber" placeholder="Document No.">
-					      </div>
-					    </div>
+					<div class="col-md-5 my-1">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">Document Number</div>
+							</div>
+							<input type="text" class="form-control" id="GTdocumentNumber" placeholder="Document No.">
+						</div>
+					</div>
 
-					    <div class="form-group col-auto my-1">
-					      <button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Get Transaction</button>
-					    </div>
-					    <div class="form-group container col-md-10"></div>
-					    <hr>
+					<div class="form-group col-auto my-1">
+						<button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Get Transaction</button>
+					</div>
+					<div class="form-group container col-md-10"></div>
+					<hr>
 
-					 </div>
+				</div>
 
-				</form>
+			</form>
 
-				<form id="formGetTransaction">
-					<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
+			<form id="formGetTransaction">
+				<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-5">
+						<label for="transactionNumber">หมายเลขธุรกรรม</label>
+						<input type="text" readonly class="form-control" id="GTtransactionNumber" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+						<label for="documentNumber">เลขที่โฉนด</label>
+						<input type="text" readonly class="form-control" id="GTdocumentNumber" placeholder="">
+					</div>
+					<div class="form-group custom-switch col-md-1">
+						<input type="checkbox" class="custom-control-input" id="customSwitch2">
+						<label class="custom-control-label" for="customSwitch2"></label>
+					</div>
+				</div>
+				<div id="customSwitchFrom2">
 					<div class="row justify-content-start">
-						    <div class="form-group container col-md-5">
-						  	  <label for="transactionNumber">หมายเลขธุรกรรม</label>
-						      <input type="text" readonly class="form-control" id="GTtransactionNumber" placeholder="">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="documentNumber">เลขที่โฉนด</label>
-						      <input type="text" readonly class="form-control" id="GTdocumentNumber" placeholder="">
-						    </div>
-					</div><hr>
-					<div class="row justify-content-start">
-					  	<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
+						<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
 					</div>
 					<div class="row justify-content-start">
-						    <div class="form-group container col-md-5">
-						  	  <label for="nameGiver">public key ผู้ให้สัญญา</label>
-						      <input type="text" readonly class="form-control" id="GTnameGiver" placeholder="">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="nameReceiver">public key ผู้รับสัญญา</label>
-						      <input type="text" readonly class="form-control" id="GTnameReceiver" placeholder="">
-						    </div>
-						    <div class="form-group container col-md-5">
-						  	  <label for="estateContract">เงินจำนอง</label>
-						      <input type="text" readonly class="form-control" id="GTmoney" placeholder="">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="estateRemain">ข้อตกลงในสัญญา</label>
-						      <textarea readonly class="form-control" id="GTdetail" placeholder=""></textarea>
-						    </div>
-					</div><br>
+						<div class="form-group container col-md-5">
+							<label for="nameGiver">public key ผู้ให้สัญญา</label>
+							<input type="text" readonly class="form-control" id="GTnameGiver" placeholder="">
+						</div>
+						<div class="form-group container col-md-5">
+							<label for="nameReceiver">public key ผู้รับสัญญา</label>
+							<input type="text" readonly class="form-control" id="GTnameReceiver" placeholder="">
+						</div>
+						<div class="form-group container col-md-5">
+							<label for="estateContract">เงินจำนอง</label>
+							<input type="text" readonly class="form-control" id="GTmoney" placeholder="">
+						</div>
+						<div class="form-group container col-md-5">
+							<label for="estateRemain">ข้อตกลงในสัญญา</label>
+							<textarea readonly class="form-control" id="GTdetail" placeholder=""></textarea>
+						</div>
+					</div>
+				</div><br>
 
-				</form>
+			</form>
 
 		</div>
 	</div>
 
 
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <form>
-		          <div class="form-group">
-		            <label for="username" class="col-form-label">Username:</label>
-		            <input type="text" class="form-control" id="username">
-		          </div>
-		          <div class="form-group">
-		            <label for="password" class="col-form-label">Password:</label>
-		            <input type="text" class="form-control" id="password">
-		          </div>
-		        </form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-		        <button type="button" id="login" class="btn btn-dark" onclick="getTransaction();">Login</button>
-		      </div>
-		    </div>
-		  </div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="username" class="col-form-label">Username:</label>
+							<input type="text" class="form-control" id="username">
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-form-label">Password:</label>
+							<input type="text" class="form-control" id="password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+					<button type="button" id="login" class="btn btn-dark" onclick="getTransaction();">Login</button>
+				</div>
+			</div>
 		</div>
+	</div>
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript">
 
-	    $(document).ready(function(){
-	        $("#formGetTransaction").hide();
-	        	$("#login").click(function() {
-	        	$("#closeModal").click();
-	        	$("#formGetTransaction").show();
-
-	        });
-	    });
+	$(document).ready(function(){
+		$("#formGetTransaction").hide();
+		$("#login").click(function() {
+			$("#closeModal").click();
+			$("#formGetTransaction").show();
+			$("#customSwitchForm2").hide();
+		});
+	});
 	</script>
+
+	<script>
+	$('#customSwitch2').change(function(){
+		if(this.checked) {
+			$("#customSwitchForm2").show();
+		}
+		else {
+			$("#customSwitchForm2").hide();
+		}
+	});
+	</script>
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
