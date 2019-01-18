@@ -79,8 +79,7 @@ var abiArray = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x50d53846"
+    "type": "function"
   },
   {
     "constant": true,
@@ -113,14 +112,17 @@ var abiArray = [
         "type": "address"
       },
       {
+        "name": "money",
+        "type": "uint256"
+      },
+      {
         "name": "detail",
         "type": "string"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x9366a13e"
+    "type": "function"
   },
   {
     "constant": true,
@@ -143,8 +145,7 @@ var abiArray = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xad407de7"
+    "type": "function"
   },
   {
     "anonymous": false,
@@ -156,8 +157,7 @@ var abiArray = [
       }
     ],
     "name": "print_string",
-    "type": "event",
-    "signature": "0xa5014519207066148cceb1209c0da9b5bc063b5c80fb25da53261714be79574b"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -169,8 +169,7 @@ var abiArray = [
       }
     ],
     "name": "print_uint",
-    "type": "event",
-    "signature": "0x692c952151b417a9943d2d683df661e7680bee63e10c12a77b4681793f8c3435"
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -222,8 +221,19 @@ var abiArray = [
       }
     ],
     "name": "print_document",
-    "type": "event",
-    "signature": "0x10a19bf8962a5ef50d20dc3f6b90c40a666b880a9215fc321bde36161b586116"
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "array",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "print_arrayuint",
+    "type": "event"
   },
   {
     "constant": false,
@@ -273,16 +283,11 @@ var abiArray = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x93ebf88b"
+    "type": "function"
   },
   {
     "constant": false,
     "inputs": [
-      {
-        "name": "_traNo",
-        "type": "uint256"
-      },
       {
         "name": "_docNo",
         "type": "uint256"
@@ -296,6 +301,10 @@ var abiArray = [
         "type": "address"
       },
       {
+        "name": "_money",
+        "type": "uint256"
+      },
+      {
         "name": "_datail",
         "type": "string"
       }
@@ -304,8 +313,7 @@ var abiArray = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0xc0332eec"
+    "type": "function"
   },
   {
     "constant": false,
@@ -319,8 +327,7 @@ var abiArray = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x24281a96"
+    "type": "function"
   },
   {
     "constant": false,
@@ -334,8 +341,7 @@ var abiArray = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x3f9b250a"
+    "type": "function"
   },
   {
     "constant": false,
@@ -349,8 +355,7 @@ var abiArray = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x45838c42"
+    "type": "function"
   },
   {
     "constant": false,
@@ -358,24 +363,19 @@ var abiArray = [
       {
         "name": "_docNo",
         "type": "uint256"
-      },
-      {
-        "name": "_traNo",
-        "type": "uint256"
       }
     ],
     "name": "getTransaction",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x7303f6ce"
+    "type": "function"
   }
 ];
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0xE4e92Bfb0D1DF0ce196e46744F2982866F7040Ed';
+var contractAddress = '0x7501Ad4f0bc1879bd104c823fb6A14C8343cA4a8';
 var contractInstance = contract.at(contractAddress);
 
 function sendDocument(){
@@ -396,7 +396,7 @@ function sendDocument(){
   contractInstance.sendDocument(ownerAddress,section,numberOfsection,district,documentNumber,
     county,province,name,nationality,size,{ gas: estimateGas },function (error, result) {
      if (!error) {
-       console.log(web3.eth.getTransaction(result);
+       console.log(web3.eth.getTransaction(result));
      }else{
        console.log(error);
      }
@@ -436,12 +436,9 @@ function saveTransaction(){
   var puGiver = document.getElementById('STnameGiver').value ;
   var puReceiver = document.getElementById('STnameReceiver').value ;
 
-  console.log(detail);
-
-  var estimateGas = contractInstance.saveTransaction.estimateGas(documentNumber,puGiver,puGiver,money,detail);
+  var estimateGas = contractInstance.saveTransaction.estimateGas(documentNumber,puGiver,puReceiver,money,detail);
   //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
-  contractInstance.saveTransaction(documentNumber,puGiver,puGiver,money,detail,{ gas: estimateGas })
-  contractInstance.print_string(function (error, result) {
+  contractInstance.saveTransaction(documentNumber,puGiver,puReceiver,money,detail,{ gas: estimateGas },function (error, result) {
      if (!error) {
        console.log(web3.eth.getTransaction(result));
      }else{
@@ -462,23 +459,15 @@ function endTransaction(){
   });
 }
 
-function getLastTransaction(){
+function getTransaction(){
   var documentNumber = document.getElementById('GTdocumentNumber').value ;
   //var transactionNumber = document.getElementById('STtransactionNumber').value
 
-  var estimateGas = contractInstance.getLastTransaction.estimateGas(documentNumber);
-  contractInstance.getLastTransaction(documentNumber,{ gas: estimateGas });
-  contractInstance.print_string(function (error, result) {
+  var estimateGas = contractInstance.getTransaction.estimateGas(documentNumber);
+  contractInstance.getTransaction(documentNumber,{ gas: estimateGas });
+  contractInstance.print_arrayuint(function (error, result) {
      if (!error) {
         console.log(result);
-        //document.getElementById('GTtransactionNumber').value = result.args. ;
-        //document.getElementById('GTdocumentNumber').value = result.args. ;
-        //document.getElementById('GTdateToRegistered').value = result.args.str ;
-        document.getElementById('GTtypeOfRegistered').value = result.args.str ;
-        //document.getElementById('GTnameGiver').value = result.args. ;
-        //document.getElementById('GTnameReceiver').value = result.args. ;
-        //document.getElementById('GTestateContract').value = result.args. ;
-        //document.getElementById('GTestateRemain').value = result.args. ;
      }else{
        console.log(error);
      }

@@ -92,7 +92,8 @@ contract Test_FullData {
         // for(uint idx = 0; idx < allList.length; idx++){
         //     _traNo=_traNo+allList[idx].length;
         // }
-        uint _traNo=_docNo+allList[_docNo].length; // แก้ไข ให้ไม่ติดบัค ****
+        transaction[] memory tmpTran = allList[_docNo];
+        uint _traNo = tmpTran.length; // แก้ไข ให้ไม่ติดบัค ****
         transaction memory newTransaction = transaction(_traNo, _docNo,  _mortgage, _mortgagee, _money, _datail);
         allList[_docNo].push(newTransaction);
         //}else{

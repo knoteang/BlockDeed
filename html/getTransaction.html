@@ -71,15 +71,15 @@
 				</form>
 
 				<form id="formGetTransaction">
-					<div class="form-group container"><br><h2>Transaction(สารบัญจดทะเบียน)</h2></div>
+					<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
 					<div class="row justify-content-start">
 						    <div class="form-group container col-md-5">
-						  	  <label for="transactionNumber">Transaction Number</label>
-						      <input type="text" readonly class="form-control" id="GTtransactionNumber" placeholder="Transaction Number">
+						  	  <label for="transactionNumber">หมายเลขธุรกรรม</label>
+						      <input type="text" readonly class="form-control" id="GTtransactionNumber" placeholder="">
 						    </div>
 						    <div class="form-group container col-md-5">
-						      <label for="documentNumber">Document Number</label>
-						      <input type="text" readonly class="form-control" id="GTdocumentNumber" placeholder="Document Number">
+						      <label for="documentNumber">เลขที่โฉนด</label>
+						      <input type="text" readonly class="form-control" id="GTdocumentNumber" placeholder="">
 						    </div>
 					</div><hr>
 					<div class="row justify-content-start">
@@ -87,28 +87,20 @@
 					</div>
 					<div class="row justify-content-start">
 						    <div class="form-group container col-md-5">
-						  	  <label for="dateToRegistered">วันที่จดทะเบียน</label>
-						      <input type="date" readonly class="form-control" id="GTdateToRegistered" placeholder="วันที่จดทะเบียน">
+						  	  <label for="nameGiver">public key ผู้ให้สัญญา</label>
+						      <input type="text" readonly class="form-control" id="GTnameGiver" placeholder="">
 						    </div>
 						    <div class="form-group container col-md-5">
-						      <label for="typeOfRegistered">ประเภทการจดทะเบียน</label>
-						      <input type="text" readonly class="form-control" id="GTtypeOfRegistered" placeholder="ประเภทการจดทะเบียน">
+						      <label for="nameReceiver">public key ผู้รับสัญญา</label>
+						      <input type="text" readonly class="form-control" id="GTnameReceiver" placeholder="">
 						    </div>
 						    <div class="form-group container col-md-5">
-						  	  <label for="nameGiver">ผู้ให้สัญญา</label>
-						      <input type="text" readonly class="form-control" id="GTnameGiver" placeholder="ชื่อ-นามสกุล">
+						  	  <label for="estateContract">เงินจำนอง</label>
+						      <input type="text" readonly class="form-control" id="GTmoney" placeholder="">
 						    </div>
 						    <div class="form-group container col-md-5">
-						      <label for="nameReceiver">ผู้รับสัญญา</label>
-						      <input type="text" readonly class="form-control" id="GTnameReceiver" placeholder="ชื่อ-นามสกุล">
-						    </div>
-						    <div class="form-group container col-md-5">
-						  	  <label for="estateContract">เนื้อที่ดินตามสัญญา</label>
-						      <input type="text" readonly class="form-control" id="GTestateContract" placeholder="ไร่,งาน,ตารางวา">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="estateRemain">เนื้อที่ดินคงเหลือ</label>
-						      <input type="text" readonly class="form-control" id="GTestateRemain" placeholder="ไร่,งาน,ตารางวา">
+						      <label for="estateRemain">ข้อตกลงในสัญญา</label>
+						      <textarea readonly class="form-control" id="GTdetail" placeholder=""></textarea>
 						    </div>
 					</div><br>
 
@@ -142,7 +134,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-		        <button type="button" id="login" class="btn btn-dark" onclick="getLastTransaction();">Login</button>
+		        <button type="button" id="login" class="btn btn-dark" onclick="getTransaction();">Login</button>
 		      </div>
 		    </div>
 		  </div>
