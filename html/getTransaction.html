@@ -49,20 +49,20 @@
 		<div class="container  bg-light">
 
 			<form>
-				<div class="form-group col-md-11"><br><h2>Get Transaction</h2></div>
+				<div class="form-group col-md-11"><br><h2>รายละเอียดธุรกรรม</h2></div>
 				<div class="form-row justify-content-center">
 
 					<div class="col-md-5 my-1">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<div class="input-group-text">Document Number</div>
+								<div class="input-group-text">เลขที่โฉนด</div>
 							</div>
-							<input type="text" class="form-control" id="GTdocumentNumber" placeholder="Document No.">
+							<input type="text" class="form-control" id="GTdocumentNumber" placeholder="">
 						</div>
 					</div>
 
 					<div class="form-group col-auto my-1">
-						<button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">Get Transaction</button>
+						<button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">แสดงธุรกรรมของโฉนด</button>
 					</div>
 					<div class="form-group container col-md-10"></div>
 					<hr>
@@ -74,45 +74,6 @@
 			<form id="formGetTransaction">
 				<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
 				<div id="insertValue">
-
-					<div class="row justify-content-start">
-						<div class="form-group container col-md-5">
-							<label for="transactionNumber">หมายเลขธุรกรรม</label>
-							<input type="text" readonly class="form-control">
-						</div>
-						<div class="form-group container col-md-5">
-							<label for="documentNumber">เลขที่โฉนด</label>
-							<input type="text" readonly class="form-control" >
-						</div>
-						<div class="form-group custom-switch col-md-1">
-							<input type="checkbox" class="custom-control-input" id="customSwitch2">
-							<label class="custom-control-label" for="customSwitch2"></label>
-						</div>
-					</div>
-					
-					<div id="customSwitchForm2">
-						<div class="row justify-content-start">
-							<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
-						</div>
-						<div class="row justify-content-start">
-							<div class="form-group container col-md-5">
-								<label for="nameGiver">public key ผู้ให้สัญญา</label>
-								<input type="text" readonly class="form-control" >
-							</div>
-							<div class="form-group container col-md-5">
-								<label for="nameReceiver">public key ผู้รับสัญญา</label>
-								<input type="text" readonly class="form-control">
-							</div>
-							<div class="form-group container col-md-5">
-								<label for="estateContract">เงินจำนอง</label>
-								<input type="text" readonly class="form-control">
-							</div>
-							<div class="form-group container col-md-5">
-								<label for="estateRemain">ข้อตกลงในสัญญา</label>
-								<textarea readonly class="form-control"></textarea>
-							</div>
-						</div>
-					</div><br>
 
 				</div>
 			</form>
@@ -160,20 +121,21 @@
 		$("#login").click(function() {
 			$("#closeModal").click();
 			$("#formGetTransaction").show();
-			$("#customSwitchForm2").hide();
 		});
 	});
 	</script>
 
 	<script>
-	$('#customSwitch2').change(function(){
-		if(this.checked) {
-			$("#customSwitchForm2").show();
+	function customSwitchForm(name) {
+		if(document.getElementById(name).checked){
+			$("#" + name + "Form").show();
+			//document.getElementById(name + "Form").style.visibility = "hidden";
+		}else{
+			$("#" + name + "Form").hide();
+			//document.getElementById(name + "Form").style.visibility = "visible";
 		}
-		else {
-			$("#customSwitchForm2").hide();
-		}
-	});
+
+	}
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

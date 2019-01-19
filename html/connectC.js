@@ -27,6 +27,33 @@ var abiArray = [
     "inputs": [
       {
         "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allEndTransaction",
+    "outputs": [
+      {
+        "name": "traNo",
+        "type": "uint256"
+      },
+      {
+        "name": "status",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
         "type": "address"
       },
       {
@@ -125,29 +152,6 @@ var abiArray = [
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "allEndTransaction",
-    "outputs": [
-      {
-        "name": "traNo",
-        "type": "uint256"
-      },
-      {
-        "name": "status",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -236,6 +240,28 @@ var abiArray = [
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "traNo",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "name": "mortgagee",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "name": "money",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "print_transaction",
+    "type": "event"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -319,6 +345,10 @@ var abiArray = [
     "constant": false,
     "inputs": [
       {
+        "name": "_docNo",
+        "type": "uint256"
+      },
+      {
         "name": "_traNo",
         "type": "uint256"
       }
@@ -375,7 +405,7 @@ var abiArray = [
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0x7501Ad4f0bc1879bd104c823fb6A14C8343cA4a8';
+var contractAddress = '0x1833874FaA56F306561235bCB86789aB578Bb022';
 var contractInstance = contract.at(contractAddress);
 
 function sendDocument(){
@@ -465,9 +495,13 @@ function getTransaction(){
 
   var estimateGas = contractInstance.getTransaction.estimateGas(documentNumber);
   contractInstance.getTransaction(documentNumber,{ gas: estimateGas });
-  contractInstance.print_arrayuint(function (error, result) {
+  contractInstance.print_transaction(function (error, result) {
      if (!error) {
-        console.log(result);
+        console.log(result.args.traNo.length);
+        for (i = 0; i < result.args.traNo.length; i++){
+          document.getElementById('insertValue').innerHTML = document.getElementById('insertValue').innerHTML + "<div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='transactionNumber'>หมายเลขธุรกรรม</label> <input type='text' readonly class='form-control'> </div> <div class='form-group container col-md-5'> <label for='documentNumber'>เลขที่โฉนด</label> <input type='text' readonly class='form-control' > </div> <div class='form-group custom-switch col-md-1'> <input type='checkbox' class='custom-control-input' id='customSwitch"+i+"' onclick=\"customSwitchForm('customSwitch"+i+"');\"> <label class='custom-control-label' for='customSwitch"+i+"'></label> </div> </div> <div id='customSwitch"+i+"Form'> <div class='row justify-content-start'> <div class='form-group container col-md-11'><h4>รายละเอียด</h4></div> </div> <div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='nameGiver'>public key ผู้ให้สัญญา</label> <input type='text' readonly class='form-control' > </div> <div class='form-group container col-md-5'> <label for='nameReceiver'>public key ผู้รับสัญญา</label> <input type='text' readonly class='form-control'> </div> <div class='form-group container col-md-5'> <label for='estateContract'>เงินจำนอง</label> <input type='text' readonly class='form-control'> </div> <div class='form-group container col-md-5'> <label for='estateRemain'>ข้อตกลงในสัญญา</label> <textarea readonly class='form-control'></textarea> </div> </div> </div><br>";
+          $("#" + "customSwitch" + i + "Form").hide();
+        }
      }else{
        console.log(error);
      }
