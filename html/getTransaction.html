@@ -68,51 +68,50 @@
 					<hr>
 
 				</div>
-
 			</form>
 
-			<form id="formGetTransaction">
-				<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
-				<div class="row justify-content-start">
-					<div class="form-group container col-md-5">
-						<label for="transactionNumber">หมายเลขธุรกรรม</label>
-						<input type="text" readonly class="form-control" id="GTtransactionNumber" placeholder="">
-					</div>
-					<div class="form-group container col-md-5">
-						<label for="documentNumber">เลขที่โฉนด</label>
-						<input type="text" readonly class="form-control" id="GTdocumentNumber" placeholder="">
-					</div>
-					<div class="form-group custom-switch col-md-1">
-						<input type="checkbox" class="custom-control-input" id="customSwitch2">
-						<label class="custom-control-label" for="customSwitch2"></label>
-					</div>
-				</div>
-				<div id="customSwitchForm2">
-					<div class="row justify-content-start">
-						<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
-					</div>
+			<div id="insertValue">
+				<form id="formGetTransaction">
+					<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
 					<div class="row justify-content-start">
 						<div class="form-group container col-md-5">
-							<label for="nameGiver">public key ผู้ให้สัญญา</label>
-							<input type="text" readonly class="form-control" id="GTnameGiver" placeholder="">
+							<label for="transactionNumber">หมายเลขธุรกรรม</label>
+							<input type="text" readonly class="form-control">
 						</div>
 						<div class="form-group container col-md-5">
-							<label for="nameReceiver">public key ผู้รับสัญญา</label>
-							<input type="text" readonly class="form-control" id="GTnameReceiver" placeholder="">
+							<label for="documentNumber">เลขที่โฉนด</label>
+							<input type="text" readonly class="form-control" >
 						</div>
-						<div class="form-group container col-md-5">
-							<label for="estateContract">เงินจำนอง</label>
-							<input type="text" readonly class="form-control" id="GTmoney" placeholder="">
-						</div>
-						<div class="form-group container col-md-5">
-							<label for="estateRemain">ข้อตกลงในสัญญา</label>
-							<textarea readonly class="form-control" id="GTdetail" placeholder=""></textarea>
+						<div class="form-group custom-switch col-md-1">
+							<input type="checkbox" class="custom-control-input" id="customSwitch2">
+							<label class="custom-control-label" for="customSwitch2"></label>
 						</div>
 					</div>
-				</div><br>
-
-			</form>
-
+					<div id="customSwitchForm2">
+						<div class="row justify-content-start">
+							<div class="form-group container col-md-11"><h4>รายละเอียด</h4></div>
+						</div>
+						<div class="row justify-content-start">
+							<div class="form-group container col-md-5">
+								<label for="nameGiver">public key ผู้ให้สัญญา</label>
+								<input type="text" readonly class="form-control" >
+							</div>
+							<div class="form-group container col-md-5">
+								<label for="nameReceiver">public key ผู้รับสัญญา</label>
+								<input type="text" readonly class="form-control">
+							</div>
+							<div class="form-group container col-md-5">
+								<label for="estateContract">เงินจำนอง</label>
+								<input type="text" readonly class="form-control">
+							</div>
+							<div class="form-group container col-md-5">
+								<label for="estateRemain">ข้อตกลงในสัญญา</label>
+								<textarea readonly class="form-control"></textarea>
+							</div>
+						</div>
+					</div><br>
+				</form>
+			</div>
 		</div>
 	</div>
 
