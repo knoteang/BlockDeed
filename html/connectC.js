@@ -452,7 +452,7 @@ function endTransaction(){
   //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
   contractInstance.endTransaction(noTran,function (error, result) {
      if (!error) {
-        console.log(result);
+        console.log();
      }else{
        console.log(error);
      }

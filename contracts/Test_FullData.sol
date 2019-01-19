@@ -15,6 +15,9 @@ contract Test_FullData {
         string nationality,
         uint size);
     event print_arrayuint(uint[] array);
+    event print_transaction(uint[] traNo,
+        address[] mortgagee,
+        uint[] money);
 
     //โครงสร้างโฉนดที่ดิน(หน้าแรก)  ในทางปฏิบัติเลขที่โฉนดมันจะซ้ำตามอำเภอ ดังนั้นอาจจะมีการะบุkeyเพิ่ม
     struct document {
@@ -55,7 +58,7 @@ contract Test_FullData {
         //..other data
         bool status;
     }
-    mapping(uint => endtransaction) public allEndTransaction;
+    mapping(uint => endtransaction[]) public allEndTransaction;
 
     //ลงทะเบียนโฉนดที่ดินให้กับผู้ใช้
     function sendDocument(address id,
@@ -101,11 +104,11 @@ contract Test_FullData {
         //}
     }
     //ยกเลิกพันธะ
-    function endTransaction(uint  _traNo) public {
+    function endTransaction(uint _docNo, uint _traNo) public {
         //require
         //ตรวจสอบความถูกต้อง
         endtransaction memory newEndTransaction =  endtransaction(_traNo, true);
-        allEndTransaction[_traNo] = newEndTransaction;
+        allEndTransaction[_docNo].push(newEndTransaction);
     }
     //แสดงรายละเอียดของโฉนด
     function getDocument(uint _docNo) public {
@@ -140,11 +143,15 @@ contract Test_FullData {
         //authen by user...
         //require
         transaction[] memory tmpTran = allList[_docNo];
-        uint[] memory output = new uint[](tmpTran.length);
+        uint[] memory traNo = new uint[](tmpTran.length);
+        address[] memory mortgagee = new address[](tmpTran.length);
+        uint[] memory money = new uint[](tmpTran.length);
         for(uint idx = 0; idx < tmpTran.length; idx++){
-            output[idx] = tmpTran[idx].traNo;
+            traNo[idx] = tmpTran[idx].traNo;
+            mortgagee[idx] = tmpTran[idx].mortgagee;
+            money[idx] = tmpTran[idx].money;
         }
-        emit print_arrayuint(output);
+        emit print_transaction(traNo,mortgagee,money);
         return;
     }
 
@@ -153,11 +160,12 @@ contract Test_FullData {
         //authen by user...
         //require
         transaction[] memory tmpTran = allList[_docNo];
+        endtransaction[] memory tmpEndTran = allEndTransaction[_docNo];
         if(tmpTran.length==0){
             return true;
         } else {
-            for(uint idx = 0; idx < tmpTran.length; idx++){
-                if(allEndTransaction[tmpTran[idx].traNo].status==true){
+            for(uint idx = 0; idx < tmpEndTran.length; idx++){
+                if(tmpEndTran[idx].traNo==tmpTran[0].traNo){
                     return true;
                 }
             }
