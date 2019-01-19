@@ -173,8 +173,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-dark" onclick="sendDocument();">Confirm</button>
+					<button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" id="login" class="btn btn-dark" onclick="sendDocument();">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -209,6 +209,14 @@
 			});
 		}, false);
 	})();
+	</script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#login").click(function() {
+			$("#closeModal").click();
+		});
+	});
 	</script>
 
 </body>

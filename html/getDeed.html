@@ -9,10 +9,10 @@
 	<script src="web3.js"></script>
 	<script src="connectC.js"></script>
 
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
-					 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,162 +37,161 @@
 		</ul>
 	</div>
 </nav>
-	<br>
-	<div class="container-fluid">
-		<div class="container bg-light">
+<br>
+<div class="container-fluid">
+	<div class="container bg-light">
 
-				<form>
-				 	<div class="form-group col-md-11"><br><h2>รายละเอียดโฉนดที่ดิน</h2></div>
-					 <div class="form-row justify-content-center">
+		<form>
+			<div class="form-group col-md-11"><br><h2>รายละเอียดโฉนดที่ดิน</h2></div>
+			<div class="form-row justify-content-center">
 
-					    <div class="col-md-5 my-1">
-					      <div class="input-group">
-					        <div class="input-group-prepend">
-					          <div class="input-group-text">เลขที่โฉนด</div>
-					        </div>
-					        <input type="text" class="form-control" id="GdocumentNumber" placeholder="">
-					      </div>
-					    </div>
+				<div class="col-md-5 my-1">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">เลขที่โฉนด</div>
+						</div>
+						<input type="text" class="form-control" id="GdocumentNumber" placeholder="">
+					</div>
+				</div>
 
-					    <div class="form-group col-auto my-1">
-					      <button type="button" id="getDeed" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">ดูรายละเอียด</button>
-					    </div>
-					    <div class="form-group container col-md-10"></div>
-					    <hr>
-
-					 </div>
-
-				</form>
-
+				<div class="form-group col-auto my-1">
+					<button type="button" id="getDeed" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">ดูรายละเอียด</button>
+				</div>
 				<div class="form-group container col-md-10"></div>
+				<hr>
 
-				<form id="formGetDeed">
-					<div class="form-group justify-content-start bg-light">
-					  <div class="row justify-content-start">
-						<div class="col-md-6">
-						  	<div class="form-group container col-md-11"><h4>ตำแหน่งที่ดิน</h4></div>
-							<div class="form-group container col-md-11">
-								<label for="section">หมายเลขแผ่นระวางแผนที่</label>
-								<input type="text" readonly class="form-control" id="Gsection" placeholder="">
-							</div>
-							<div class="form-group container col-md-11">
-								<label for="numberOfsection">เลขที่ดิน</label>
-								<input type="text" readonly class="form-control" id="GnumberOfsection" placeholder="">
-							</div>
-							<div class="form-group container col-md-11">
-								<label for="district">ตำบล</label>
-								<input type="text" readonly class="form-control" id="Gdistrict" placeholder="">
-							</div>
+			</div>
+
+		</form>
+
+		<div class="form-group container col-md-10"></div>
+
+		<form id="formGetDeed">
+			<div class="form-group justify-content-start bg-light">
+				<div class="row justify-content-start">
+					<div class="col-md-6">
+						<div class="form-group container col-md-11"><h4>ตำแหน่งที่ดิน</h4></div>
+						<div class="form-group container col-md-11">
+							<label for="section">หมายเลขแผ่นระวางแผนที่</label>
+							<input type="text" readonly class="form-control" id="Gsection" placeholder="">
 						</div>
-						<div class="col-md-6">
-						  <div class="form-group container col-md-11"><h4>โฉนดที่ดิน</h4></div>
-						  <div class="form-group container col-md-11">
-						     <label for="documentNumber">เลขที่โฉนด</label>
-						     <input type="text" readonly class="form-control" id="GdocumentNumberR" placeholder="">
-						   </div>
-							<div class="w-100"></div>
-							<div class="form-group container col-md-11">
-						     <label for="county">อำเภอ</label>
-						     <input type="text" readonly class="form-control" id="Gcounty" placeholder="">
-						   </div>
-						  <div class="form-group container col-md-11">
-						     <label for="province">จังหวัด</label>
-						     <input type="text" readonly class="form-control" id="Gprovince" placeholder="">
-						   </div>
+						<div class="form-group container col-md-11">
+							<label for="numberOfsection">เลขที่ดิน</label>
+							<input type="text" readonly class="form-control" id="GnumberOfsection" placeholder="">
+						</div>
+						<div class="form-group container col-md-11">
+							<label for="district">ตำบล</label>
+							<input type="text" readonly class="form-control" id="Gdistrict" placeholder="">
 						</div>
 					</div>
-					   <hr>
-					  <div class="row justify-content-start">
-					  	<div class="form-group container col-md-11"><h4>ระบุตัวเจ้าของ</h4></div>
-					  </div>
-
-					  <div class="row justify-content-start">
-
-  						<div class="form-group container col-md-5">
-						      <label for="firstname">ชื่อจริง</label>
-						      <input type="text" readonly class="form-control" id="Gfirstname" placeholder="">
-						    </div>
-						    <div class="form-group container col-md-5">
-						      <label for="lastname">นามสกุล</label>
-						      <input type="text" readonly class="form-control" id="Glastname" placeholder="">
-						    </div>
-						  	<div class="w-100"></div>
-						  	<div class="form-group container col-md-5">
-						    </div>
-						    <div class="w-100"></div>
-						    <div class="form-group container col-md-5">
-						      <label for="nationality">สัญชาติ</label>
-						      <input type="text" readonly class="form-control" id="Gnationality" placeholder="">
-						    </div>
+					<div class="col-md-6">
+						<div class="form-group container col-md-11"><h4>โฉนดที่ดิน</h4></div>
+						<div class="form-group container col-md-11">
+							<label for="documentNumber">เลขที่โฉนด</label>
+							<input type="text" readonly class="form-control" id="GdocumentNumberR" placeholder="">
 						</div>
-						<hr>
-					  	<div class="row justify-content-start">
-						    <div class="form-group container col-md-11"><h4>ขนาดที่ดิน</h4></div>
-						    <div class="w-100"></div>
-						    <div class="form-group container col-md-5">
-						  	  <label for="size">ขนาดที่ดิน(ไร่,งาน,ตารางวา)</label>
-						      <input type="text" readonly class="form-control" id="Gsize" placeholder="">
-						    </div>
-						    <div class="form-group container col-md-5">
-						    </div>
-					   </div>
+						<div class="w-100"></div>
+						<div class="form-group container col-md-11">
+							<label for="county">อำเภอ</label>
+							<input type="text" readonly class="form-control" id="Gcounty" placeholder="">
+						</div>
+						<div class="form-group container col-md-11">
+							<label for="province">จังหวัด</label>
+							<input type="text" readonly class="form-control" id="Gprovince" placeholder="">
+						</div>
 					</div>
-					<div class="form-group container col-md-5"></div>
+				</div>
+				<hr>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-11"><h4>ระบุตัวเจ้าของ</h4></div>
+				</div>
+
+				<div class="row justify-content-start">
+
+					<div class="form-group container col-md-5">
+						<label for="firstname">ชื่อจริง</label>
+						<input type="text" readonly class="form-control" id="Gfirstname" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+						<label for="lastname">นามสกุล</label>
+						<input type="text" readonly class="form-control" id="Glastname" placeholder="">
+					</div>
+					<div class="w-100"></div>
+					<div class="form-group container col-md-5">
+					</div>
+					<div class="w-100"></div>
+					<div class="form-group container col-md-5">
+						<label for="nationality">สัญชาติ</label>
+						<input type="text" readonly class="form-control" id="Gnationality" placeholder="">
+					</div>
+				</div>
+				<hr>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-11"><h4>ขนาดที่ดิน</h4></div>
+					<div class="w-100"></div>
+					<div class="form-group container col-md-5">
+						<label for="size">ขนาดที่ดิน(ไร่,งาน,ตารางวา)</label>
+						<input type="text" readonly class="form-control" id="Gsize" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+					</div>
+				</div>
+			</div>
+			<div class="form-group container col-md-5"></div>
+		</form>
+
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Confirm transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="username" class="col-form-label">Public key :</label>
+						<input type="text" class="form-control" id="username">
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-form-label">Private key :</label>
+						<input type="text" class="form-control" id="password">
+					</div>
 				</form>
-
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+				<button type="button" id="login" class="btn btn-dark" onclick="getDocument();">Confirm</button>
+			</div>
 		</div>
 	</div>
-
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLongTitle">Confirm transaction</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <form>
-		          <div class="form-group">
-		            <label for="username" class="col-form-label">Public key :</label>
-		            <input type="text" class="form-control" id="username">
-		          </div>
-		          <div class="form-group">
-		            <label for="password" class="col-form-label">Private key :</label>
-		            <input type="text" class="form-control" id="password">
-		          </div>
-		        </form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-		        <button type="button" id="login" class="btn btn-dark" onclick="getDocument();">Confirm</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+</div>
 
 
 
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script type="text/javascript">
-
-	    $(document).ready(function(){
-	        $("#formGetDeed").hide();
-	        	$("#login").click(function() {
-	        	$("#closeModal").click();
-	        	$("#formGetDeed").show();
-
-	        });
-	    });
-	</script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#formGetDeed").hide();
+	$("#login").click(function() {
+		$("#closeModal").click();
+		$("#formGetDeed").show();
+		
+	});
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>
