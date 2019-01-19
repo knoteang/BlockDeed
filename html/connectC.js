@@ -427,8 +427,14 @@ function sendDocument(){
     county,province,name,nationality,size,{ gas: estimateGas },function (error, result) {
      if (!error) {
        console.log(web3.eth.getTransaction(result));
+       $("#fail").hide();
+       $("#complete").show();
+       $("#transactionStatus").modal();
      }else{
        console.log(error);
+       $("#complete").hide();
+       $("#fail").show();
+       $("#transactionStatus").modal();
      }
   });
 }
@@ -437,7 +443,19 @@ function getDocument(){
     var documentNumber = document.getElementById('GdocumentNumber').value;
     var estimateGas = contractInstance.getDocument.estimateGas(documentNumber);
     console.log(documentNumber);
-    contractInstance.getDocument(documentNumber,{ gas: estimateGas });
+    contractInstance.getDocument(documentNumber,{ gas: estimateGas },function (error, result) {
+      if (!error) {
+        console.log(web3.eth.getTransaction(result));
+        $("#fail").hide();
+        $("#complete").show();
+        $("#transactionStatus").modal();
+      }else{
+        console.log(error);
+        $("#complete").hide();
+        $("#fail").show();
+        $("#transactionStatus").modal();
+      }
+    });
     contractInstance.print_document(function (error, result) {
      if (!error) {
         console.log(result);
@@ -471,8 +489,14 @@ function saveTransaction(){
   contractInstance.saveTransaction(documentNumber,puGiver,puReceiver,money,detail,{ gas: estimateGas },function (error, result) {
      if (!error) {
        console.log(web3.eth.getTransaction(result));
+       $("#fail").hide();
+       $("#complete").show();
+       $("#transactionStatus").modal();
      }else{
        console.log(error);
+       $("#complete").hide();
+       $("#fail").show();
+       $("#transactionStatus").modal();
      }
   });
 }
@@ -494,7 +518,19 @@ function getTransaction(){
   //var transactionNumber = document.getElementById('STtransactionNumber').value
 
   var estimateGas = contractInstance.getTransaction.estimateGas(documentNumber);
-  contractInstance.getTransaction(documentNumber,{ gas: estimateGas });
+  contractInstance.getTransaction(documentNumber,{ gas: estimateGas },function (error, result) {
+    if (!error) {
+      console.log(web3.eth.getTransaction(result));
+      $("#fail").hide();
+      $("#complete").show();
+      $("#transactionStatus").modal();
+    }else{
+      console.log(error);
+      $("#complete").hide();
+      $("#fail").show();
+      $("#transactionStatus").modal();
+    }
+  });
   contractInstance.print_transaction(function (error, result) {
      if (!error) {
         console.log(result.args.traNo.length);

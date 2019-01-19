@@ -37,103 +37,120 @@
 		</ul>
 	</div>
 </nav>
-	<br>
-	<div class="container-fluid">
-		<div class="container  bg-light">
+<br>
+<div class="container-fluid">
+	<div class="container  bg-light">
 
-			<form>
-				<div class="form-group col-md-11"><br><h2>รายละเอียดธุรกรรม</h2></div>
-				<div class="form-row justify-content-center">
+		<form>
+			<div class="form-group col-md-11"><br><h2>รายละเอียดธุรกรรม</h2></div>
+			<div class="form-row justify-content-center">
 
-					<div class="col-md-5 my-1">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">เลขที่โฉนด</div>
-							</div>
-							<input type="text" class="form-control" id="GTdocumentNumber" placeholder="">
+				<div class="col-md-5 my-1">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">เลขที่โฉนด</div>
 						</div>
+						<input type="text" class="form-control" id="GTdocumentNumber" placeholder="">
 					</div>
-
-					<div class="form-group col-auto my-1">
-						<button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">แสดงธุรกรรมของโฉนด</button>
-					</div>
-					<div class="form-group container col-md-10"></div>
-					<hr>
-
 				</div>
-			</form>
 
-
-			<form id="formGetTransaction">
-				<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
-				<div id="insertValue">
-
+				<div class="form-group col-auto my-1">
+					<button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">แสดงธุรกรรมของโฉนด</button>
 				</div>
-			</form>
+				<div class="form-group container col-md-10"></div>
+				<hr>
 
-		</div>
+			</div>
+		</form>
+
+
+		<form id="formGetTransaction">
+			<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
+			<div id="insertValue">
+
+			</div>
+		</form>
+
 	</div>
+</div>
 
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Confirm transaction</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="username" class="col-form-label">Public key :</label>
-							<input type="text" class="form-control" id="username">
-						</div>
-						<div class="form-group">
-							<label for="password" class="col-form-label">Private key :</label>
-							<input type="text" class="form-control" id="password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-					<button type="button" id="login" class="btn btn-dark" onclick="getTransaction();">Confirm</button>
-				</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Confirm transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="username" class="col-form-label">Public key :</label>
+						<input type="text" class="form-control" id="username">
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-form-label">Private key :</label>
+						<input type="text" class="form-control" id="password">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+				<button type="button" id="login" class="btn btn-dark" onclick="getTransaction();">Confirm</button>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="transactionStatus" tabindex="-1" role="dialog" aria-labelledby="transactionSuccessCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="transactionSuccessCenterTitle">Transaction</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p class="text-success text-center" id="complete" style="font-size: 25px;">Transaction Complete</p>
+				<p class="text-danger text-center" id="fail" style="font-size: 25px;">Transaction Fail</p>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
 
-	$(document).ready(function(){
-		$("#formGetTransaction").hide();
-		$("#login").click(function() {
-			$("#closeModal").click();
-			$("#formGetTransaction").show();
-		});
+$(document).ready(function(){
+	$("#formGetTransaction").hide();
+	$("#login").click(function() {
+		$("#closeModal").click();
+		$("#formGetTransaction").show();
 	});
-	</script>
+});
+</script>
 
-	<script>
-	function customSwitchForm(name) {
-		if(document.getElementById(name).checked){
-			$("#" + name + "Form").show();
-			//document.getElementById(name + "Form").style.visibility = "hidden";
-		}else{
-			$("#" + name + "Form").hide();
-			//document.getElementById(name + "Form").style.visibility = "visible";
-		}
-
+<script>
+function customSwitchForm(name) {
+	if(document.getElementById(name).checked){
+		$("#" + name + "Form").show();
+		//document.getElementById(name + "Form").style.visibility = "hidden";
+	}else{
+		$("#" + name + "Form").hide();
+		//document.getElementById(name + "Form").style.visibility = "visible";
 	}
-	</script>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+}
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>
