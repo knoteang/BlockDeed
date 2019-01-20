@@ -6,11 +6,11 @@ web3.setProvider(new web3.providers.HttpProvider('http://localhost:7545'));
 
 // 2. Check node status
 function checkStatus(){
-    if(web3.isConnected()){
-        document.getElementById('node_status').innerHTML =  "TRUE";
-    }else{
-        document.getElementById('node_status').innerHTML =  "FALSE";
-    }
+  if(web3.isConnected()){
+    document.getElementById('node_status').innerHTML =  "TRUE";
+  }else{
+    document.getElementById('node_status').innerHTML =  "FALSE";
+  }
 }
 
 /*
@@ -405,8 +405,9 @@ var abiArray = [
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0x1833874FaA56F306561235bCB86789aB578Bb022';
+var contractAddress = '0x2E98192d84E0a60B9692cB311529e252a7f1C14d';
 var contractInstance = contract.at(contractAddress);
+var acc = "";
 
 function sendDocument(){
   var section = document.getElementById('Csection').value ;
@@ -423,135 +424,146 @@ function sendDocument(){
   var estimateGas = contractInstance.sendDocument.estimateGas(ownerAddress,section,numberOfsection,district,documentNumber,
     county,province,name,nationality,size);
 
-  contractInstance.sendDocument(ownerAddress,section,numberOfsection,district,documentNumber,
-    county,province,name,nationality,size,{ gas: estimateGas },function (error, result) {
-     if (!error) {
-       console.log(web3.eth.getTransaction(result));
-       $("#fail").hide();
-       $("#complete").show();
-       $("#transactionStatus").modal();
-     }else{
-       console.log(error);
-       $("#complete").hide();
-       $("#fail").show();
-       $("#transactionStatus").modal();
-     }
-  });
-}
-
-function getDocument(){
-    var documentNumber = document.getElementById('GdocumentNumber').value;
-    var estimateGas = contractInstance.getDocument.estimateGas(documentNumber);
-    console.log(documentNumber);
-    contractInstance.getDocument(documentNumber,{ gas: estimateGas },function (error, result) {
-      if (!error) {
-        console.log(web3.eth.getTransaction(result));
-        $("#fail").hide();
-        $("#complete").show();
-        $("#transactionStatus").modal();
-      }else{
-        console.log(error);
-        $("#complete").hide();
-        $("#fail").show();
-        $("#transactionStatus").modal();
-      }
-    });
-    contractInstance.print_document(function (error, result) {
-     if (!error) {
-        console.log(result);
-        document.getElementById('Gsection').value = result.args.section ;
-        document.getElementById('GnumberOfsection').value = result.args.numberOfsection ;
-        document.getElementById('Gdistrict').value = result.args.district ;
-        document.getElementById('GdocumentNumberR').value = result.args.docNo ;
-        document.getElementById('Gcounty').value = result.args.county ;
-        document.getElementById('Gprovince').value = result.args.province ;
-        var tmpName = result.args.name.split(" ");
-        document.getElementById('Gfirstname').value = tmpName[0] ;
-        document.getElementById('Glastname').value = tmpName[1] ;
-        document.getElementById('Gnationality').value = result.args.nationality ;
-        document.getElementById('Gsize').value = result.args.size ;
-     }else{
-       console.log("error");
-     }
-  });
-}
-
-function saveTransaction(){
-
-  var documentNumber = document.getElementById('STdocumentNumber').value ;
-  var detail = document.getElementById('STdetail').value ;
-  var money = document.getElementById('STmoney').value ;
-  var puGiver = document.getElementById('STnameGiver').value ;
-  var puReceiver = document.getElementById('STnameReceiver').value ;
-
-  var estimateGas = contractInstance.saveTransaction.estimateGas(documentNumber,puGiver,puReceiver,money,detail);
-  //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
-  contractInstance.saveTransaction(documentNumber,puGiver,puReceiver,money,detail,{ gas: estimateGas },function (error, result) {
-     if (!error) {
-       console.log(web3.eth.getTransaction(result));
-       $("#fail").hide();
-       $("#complete").show();
-       $("#transactionStatus").modal();
-     }else{
-       console.log(error);
-       $("#complete").hide();
-       $("#fail").show();
-       $("#transactionStatus").modal();
-     }
-  });
-}
-
-function endTransaction(){
-  var noTran = document.getElementById('tranEnd').value ;
-  //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
-  contractInstance.endTransaction(noTran,function (error, result) {
-     if (!error) {
-        console.log();
-     }else{
-       console.log(error);
-     }
-  });
-}
-
-function getTransaction(){
-  var documentNumber = document.getElementById('GTdocumentNumber').value ;
-  //var transactionNumber = document.getElementById('STtransactionNumber').value
-
-  var estimateGas = contractInstance.getTransaction.estimateGas(documentNumber);
-  contractInstance.getTransaction(documentNumber,{ gas: estimateGas },function (error, result) {
-    if (!error) {
-      console.log(web3.eth.getTransaction(result));
-      $("#fail").hide();
-      $("#complete").show();
-      $("#transactionStatus").modal();
-    }else{
-      console.log(error);
-      $("#complete").hide();
-      $("#fail").show();
-      $("#transactionStatus").modal();
-    }
-  });
-  contractInstance.print_transaction(function (error, result) {
-     if (!error) {
-        console.log(result.args.traNo.length);
-        for (i = 0; i < result.args.traNo.length; i++){
-          document.getElementById('insertValue').innerHTML = document.getElementById('insertValue').innerHTML + "<div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='transactionNumber'>หมายเลขธุรกรรม</label> <input type='text' readonly class='form-control'> </div> <div class='form-group container col-md-5'> <label for='documentNumber'>เลขที่โฉนด</label> <input type='text' readonly class='form-control' > </div> <div class='form-group custom-switch col-md-1'> <input type='checkbox' class='custom-control-input' id='customSwitch"+i+"' onclick=\"customSwitchForm('customSwitch"+i+"');\"> <label class='custom-control-label' for='customSwitch"+i+"'></label> </div> </div> <div id='customSwitch"+i+"Form'> <div class='row justify-content-start'> <div class='form-group container col-md-11'><h4>รายละเอียด</h4></div> </div> <div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='nameGiver'>public key ผู้ให้สัญญา</label> <input type='text' readonly class='form-control' > </div> <div class='form-group container col-md-5'> <label for='nameReceiver'>public key ผู้รับสัญญา</label> <input type='text' readonly class='form-control'> </div> <div class='form-group container col-md-5'> <label for='estateContract'>เงินจำนอง</label> <input type='text' readonly class='form-control'> </div> <div class='form-group container col-md-5'> <label for='estateRemain'>ข้อตกลงในสัญญา</label> <textarea readonly class='form-control'></textarea> </div> </div> </div><br>";
-          $("#" + "customSwitch" + i + "Form").hide();
+    contractInstance.sendDocument(ownerAddress,section,numberOfsection,district,documentNumber,
+      county,province,name,nationality,size,{ gas: estimateGas },function (error, result) {
+        if (!error) {
+          console.log(web3.eth.getTransaction(result));
+          $("#fail").hide();
+          $("#complete").show();
+          $("#transactionStatus").modal();
+        }else{
+          console.log(error);
+          $("#complete").hide();
+          $("#fail").show();
+          $("#transactionStatus").modal();
         }
-     }else{
-       console.log(error);
-     }
-  });
-}
+      });
+    }
 
-function checkContract(){
-  var noDoc = document.getElementById('docCheck').value ;
-  //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
-  contractInstance.checkContract(noDoc,function (error, result) {
-     if (!error) {
-        console.log(result);
-     }else{
-       console.log(error);
-     }
-  });
-}
+    function getDocument(){
+      var documentNumber = document.getElementById('GdocumentNumber').value;
+      var estimateGas = contractInstance.getDocument.estimateGas(documentNumber);
+      console.log(documentNumber);
+      contractInstance.getDocument(documentNumber,{ gas: estimateGas },function (error, result) {
+        if (!error) {
+          console.log(web3.eth.getTransaction(result));
+          $("#fail").hide();
+          $("#complete").show();
+          $("#transactionStatus").modal();
+        }else{
+          console.log(error);
+          $("#complete").hide();
+          $("#fail").show();
+          $("#transactionStatus").modal();
+        }
+      });
+      contractInstance.print_document(function (error, result) {
+        if (!error) {
+          console.log(result);
+          document.getElementById('Gsection').value = result.args.section ;
+          document.getElementById('GnumberOfsection').value = result.args.numberOfsection ;
+          document.getElementById('Gdistrict').value = result.args.district ;
+          document.getElementById('GdocumentNumberR').value = result.args.docNo ;
+          document.getElementById('Gcounty').value = result.args.county ;
+          document.getElementById('Gprovince').value = result.args.province ;
+          var tmpName = result.args.name.split(" ");
+          document.getElementById('Gfirstname').value = tmpName[0] ;
+          document.getElementById('Glastname').value = tmpName[1] ;
+          document.getElementById('Gnationality').value = result.args.nationality ;
+          document.getElementById('Gsize').value = result.args.size ;
+        }else{
+          console.log(error);
+        }
+      });
+    }
+
+    function saveTransaction(){
+
+      var documentNumber = document.getElementById('STdocumentNumber').value ;
+      var detail = document.getElementById('STdetail').value ;
+      var money = document.getElementById('STmoney').value ;
+      var puGiver = document.getElementById('STnameGiver').value ;
+      var puReceiver = document.getElementById('STnameReceiver').value ;
+
+      var estimateGas = contractInstance.saveTransaction.estimateGas(documentNumber,puGiver,puReceiver,money,detail);
+      //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
+      contractInstance.saveTransaction(documentNumber,puGiver,puReceiver,money,detail,{ gas: estimateGas },function (error, result) {
+        if (!error) {
+          console.log(web3.eth.getTransaction(result));
+          $("#fail").hide();
+          $("#complete").show();
+          $("#transactionStatus").modal();
+        }else{
+          console.log(error);
+          $("#complete").hide();
+          $("#fail").show();
+          $("#transactionStatus").modal();
+        }
+      });
+    }
+
+    function endTransaction(){
+      var noTran = document.getElementById('tranEnd').value ;
+      //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
+      contractInstance.endTransaction(noTran,function (error, result) {
+        if (!error) {
+          console.log();
+        }else{
+          console.log(error);
+        }
+      });
+    }
+
+    function getTransaction(){
+      var documentNumber = document.getElementById('GTdocumentNumber').value ;
+      //var transactionNumber = document.getElementById('STtransactionNumber').value
+
+      var estimateGas = contractInstance.getTransaction.estimateGas(documentNumber);
+      contractInstance.getTransaction(documentNumber,{ gas: estimateGas },function (error, result) {
+        if (!error) {
+          console.log(web3.eth.getTransaction(result));
+          $("#fail").hide();
+          $("#complete").show();
+          $("#transactionStatus").modal();
+        }else{
+          console.log(error);
+          $("#complete").hide();
+          $("#fail").show();
+          $("#transactionStatus").modal();
+        }
+      });
+      contractInstance.print_transaction(function (error, result) {
+        if (!error) {
+          console.log(result.args.traNo.length);
+          for (i = 0; i < result.args.traNo.length; i++){
+            document.getElementById('insertValue').innerHTML = document.getElementById('insertValue').innerHTML + "<div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='transactionNumber'>หมายเลขธุรกรรม</label> <input type='text' readonly class='form-control' value='"+result.args.traNo[0]+"'> </div> <div class='form-group container col-md-5'> <label for='documentNumber'>เลขที่โฉนด</label> <input type='text' readonly class='form-control' ></div> <div class='form-group custom-switch col-md-1'> <input type='checkbox' class='custom-control-input' id='customSwitch"+i+"' onclick=\"customSwitchForm('customSwitch"+i+"');\"> <label class='custom-control-label' for='customSwitch"+i+"'></label> </div> </div> <div id='customSwitch"+i+"Form'> <div class='row justify-content-start'> <div class='form-group container col-md-11'><h4>รายละเอียด</h4></div> </div> <div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='nameGiver'>public key ผู้ให้สัญญา</label> <input type='text' readonly class='form-control' > </div> <div class='form-group container col-md-5'> <label for='nameReceiver'>public key ผู้รับสัญญา</label> <input type='text' readonly class='form-control' value='"+result.args.mortgagee[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateContract'>เงินจำนอง</label> <input type='text' readonly class='form-control'  value='"+result.args.money[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateRemain'>ข้อตกลงในสัญญา</label> <textarea readonly class='form-control'></textarea> </div> </div> </div><br>";
+            $("#" + "customSwitch" + i + "Form").hide();
+          }
+        }else{
+          console.log(error);
+        }
+      });
+    }
+
+    function checkContract(){
+      var noDoc = document.getElementById('docCheck').value ;
+      //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
+      contractInstance.checkContract(noDoc,function (error, result) {
+        if (!error) {
+          console.log(result);
+        }else{
+          console.log(error);
+        }
+      });
+    }
+
+    function login(){
+      var user = document.getElementById('userH').value ;
+      var pass = document.getElementById('pwordH').value ;
+      if (user == 1 && pass == 1) {
+        alert(1);
+        acc = 1;
+      }else{
+        acc = 2;
+      }
+    }

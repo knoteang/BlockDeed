@@ -6,6 +6,9 @@
     <meta http-equiv="content-language" content="th" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <script src="web3.js"></script>
+  	<script src="connectC.js"></script>
+
 <!--===============================================================================================-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -17,25 +20,25 @@
             <div class="jumbotron" style="margin: 40% auto 15% auto;">
                 <form name="loginform" method="post">
                      <div class="form-row justify-content-center">
-                        <h1 class="display-4">Login</h1>             
+                        <h1 class="display-4">Login</h1>
                         <div class="form-group col-md-11">
-                            <input type="text" name="usr" class="form-control"  placeholder="Username" required>
+                            <input type="text" id="userH" name="usr" class="form-control"  placeholder="Username" required>
                             <div class="invalid-feedback">
                             Please fill out this field.
                             </div>
                         </div>
                         <div class="form-group col-md-11">
-                            <input type="password" name="pword" class="form-control"  placeholder="Password">
+                            <input type="password" id="pwordH" name="pword" class="form-control"  placeholder="Password" required>
                         </div>
                         <div class="col-md-11">
-                            <button type="submit" class="btn btn-dark btn-block" >Login</button>
+                            <button type="submit" class="btn btn-dark btn-block" onclick="login();" >Login</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    
+
     <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

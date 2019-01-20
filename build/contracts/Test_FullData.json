@@ -12231,10 +12231,16 @@
       "links": {},
       "address": "0x1833874FaA56F306561235bCB86789aB578Bb022",
       "transactionHash": "0xea95871dcae201f83ed7da408df727f36948ecf5878c545f6119af8f5a14eac0"
+    },
+    "1547984053301": {
+      "events": {},
+      "links": {},
+      "address": "0x2E98192d84E0a60B9692cB311529e252a7f1C14d",
+      "transactionHash": "0xafab5a3a1cb5254ecccff4993502df28654d4c14555850a59aab210e8e0a5180"
     }
   },
   "schemaVersion": "3.0.0",
-  "updatedAt": "2019-01-19T11:39:16.041Z",
+  "updatedAt": "2019-01-20T12:04:42.240Z",
   "devdoc": {
     "methods": {}
   },
