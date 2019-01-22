@@ -22,16 +22,16 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item">
+				<li class="nav-item" id="createLi">
 					<a class="nav-link" href="createDeed.html">สร้างโฉนดที่ดิน<span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" id="getDeedLi">
 					<a class="nav-link" href="getDeed.html">เรียกดูโฉนดที่ดิน</a>
 				</li>
-				<li class="nav-item">
+				<!-- <li class="nav-item" id="saveTransactionLi">
 					<a class="nav-link" href="saveTransaction.html">บันทึกธุรกรรม</a>
-				</li>
-				<li class="nav-item">
+				</li> -->
+				<li class="nav-item" id="getTransactionLi">
 					<a class="nav-link" href="getTransaction.html">เรียกดูธุรกรรม</a>
 				</li>
 			</ul>
@@ -131,7 +131,7 @@
 					<div class="col-md-6">
 						<div class="form-group container col-md-11"><h4>ขนาดที่ดิน</h4></div>
 						<div class="form-group container col-md-11">
-							<label for="size">ขนาดที่ดิน(ไร่,งาน,ตารางวา)</label>
+							<label for="size">ขนาดที่ดิน(ตารางวา)</label>
 							<input type="text" class="form-control" id="Csize" placeholder="" required>
 							<div class="invalid-feedback">
 								กรุณากรอกข้อมูลในช่องนี้
@@ -228,7 +228,6 @@
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-		alert(acc);
 		$("#login").click(function() {
 			$("#closeModal").click();
 		});

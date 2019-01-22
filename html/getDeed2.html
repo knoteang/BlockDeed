@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Test Create Deed</title>
+	<title>Test Get Deed</title>
 	<meta charset="UTF-8">
 	<meta http-equiv="content-language" content="th" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,27 +22,27 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
-			<li class="nav-item" id="createLi">
+			<!-- <li class="nav-item" id="createLi">
 				<a class="nav-link" href="createDeed.html">สร้างโฉนดที่ดิน<span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item" id="getDeedLi">
-				<a class="nav-link" href="getDeed.html">เรียกดูโฉนดที่ดิน</a>
-			</li>
-			<!-- <li class="nav-item" id="saveTransactionLi">
-				<a class="nav-link" href="saveTransaction.html">บันทึกธุรกรรม</a>
 			</li> -->
+			<li class="nav-item" id="getDeedLi">
+				<a class="nav-link" href="getDeed2.html">เรียกดูโฉนดที่ดิน</a>
+			</li>
+			<li class="nav-item" id="saveTransactionLi">
+				<a class="nav-link" href="saveTransaction2.html">บันทึกธุรกรรม</a>
+			</li>
 			<li class="nav-item" id="getTransactionLi">
-				<a class="nav-link" href="getTransaction.html">เรียกดูธุรกรรม</a>
+				<a class="nav-link" href="getTransaction2.html">เรียกดูธุรกรรม</a>
 			</li>
 		</ul>
 	</div>
 </nav>
 <br>
 <div class="container-fluid">
-	<div class="container  bg-light">
+	<div class="container bg-light">
 
 		<form>
-			<div class="form-group col-md-11"><br><h2>รายละเอียดธุรกรรม</h2></div>
+			<div class="form-group col-md-11"><br><h2>รายละเอียดโฉนดที่ดิน</h2></div>
 			<div class="form-row justify-content-center">
 
 				<div class="col-md-5 my-1">
@@ -50,25 +50,94 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">เลขที่โฉนด</div>
 						</div>
-						<input type="text" class="form-control" id="GTdocumentNumber" placeholder="">
+						<input type="text" class="form-control" id="GdocumentNumber" placeholder="">
 					</div>
 				</div>
 
 				<div class="form-group col-auto my-1">
-					<button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">แสดงธุรกรรมของโฉนด</button>
+					<button type="button" id="getDeed" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">ดูรายละเอียด</button>
 				</div>
 				<div class="form-group container col-md-10"></div>
 				<hr>
 
 			</div>
+
 		</form>
 
+		<div class="form-group container col-md-10"></div>
 
-		<form id="formGetTransaction">
-			<div class="form-group container"><br><h2>สารบัญจดทะเบียน</h2></div>
-			<div id="insertValue">
+		<form id="formGetDeed">
+			<div class="form-group justify-content-start bg-light">
+				<div class="row justify-content-start">
+					<div class="col-md-6">
+						<div class="form-group container col-md-11"><h4>ตำแหน่งที่ดิน</h4></div>
+						<div class="form-group container col-md-11">
+							<label for="section">หมายเลขแผ่นระวางแผนที่</label>
+							<input type="text" readonly class="form-control" id="Gsection" placeholder="">
+						</div>
+						<div class="form-group container col-md-11">
+							<label for="numberOfsection">เลขที่ดิน</label>
+							<input type="text" readonly class="form-control" id="GnumberOfsection" placeholder="">
+						</div>
+						<div class="form-group container col-md-11">
+							<label for="district">ตำบล</label>
+							<input type="text" readonly class="form-control" id="Gdistrict" placeholder="">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group container col-md-11"><h4>โฉนดที่ดิน</h4></div>
+						<div class="form-group container col-md-11">
+							<label for="documentNumber">เลขที่โฉนด</label>
+							<input type="text" readonly class="form-control" id="GdocumentNumberR" placeholder="">
+						</div>
+						<div class="w-100"></div>
+						<div class="form-group container col-md-11">
+							<label for="county">อำเภอ</label>
+							<input type="text" readonly class="form-control" id="Gcounty" placeholder="">
+						</div>
+						<div class="form-group container col-md-11">
+							<label for="province">จังหวัด</label>
+							<input type="text" readonly class="form-control" id="Gprovince" placeholder="">
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-11"><h4>ระบุตัวเจ้าของ</h4></div>
+				</div>
 
+				<div class="row justify-content-start">
+
+					<div class="form-group container col-md-5">
+						<label for="firstname">ชื่อจริง</label>
+						<input type="text" readonly class="form-control" id="Gfirstname" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+						<label for="lastname">นามสกุล</label>
+						<input type="text" readonly class="form-control" id="Glastname" placeholder="">
+					</div>
+					<div class="w-100"></div>
+					<div class="form-group container col-md-5">
+					</div>
+					<div class="w-100"></div>
+					<div class="form-group container col-md-5">
+						<label for="nationality">สัญชาติ</label>
+						<input type="text" readonly class="form-control" id="Gnationality" placeholder="">
+					</div>
+				</div>
+				<hr>
+				<div class="row justify-content-start">
+					<div class="form-group container col-md-11"><h4>ขนาดที่ดิน</h4></div>
+					<div class="w-100"></div>
+					<div class="form-group container col-md-5">
+						<label for="size">ขนาดที่ดิน(ไร่,งาน,ตารางวา)</label>
+						<input type="text" readonly class="form-control" id="Gsize" placeholder="">
+					</div>
+					<div class="form-group container col-md-5">
+					</div>
+				</div>
 			</div>
+			<div class="form-group container col-md-5"></div>
 		</form>
 
 	</div>
@@ -99,7 +168,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-				<button type="button" id="login" class="btn btn-dark" onclick="getTransaction();">Confirm</button>
+				<button type="button" id="login" class="btn btn-dark" onclick="getDocument();">Confirm</button>
 			</div>
 		</div>
 	</div>
@@ -123,31 +192,18 @@
 </div>
 
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function(){
-	$("#formGetTransaction").hide();
+	$("#formGetDeed").hide();
 	$("#login").click(function() {
 		$("#closeModal").click();
-		$("#formGetTransaction").show();
+		$("#formGetDeed").show();
+
 	});
 });
 </script>
-
-<script>
-function customSwitchForm(name) {
-	if(document.getElementById(name).checked){
-		$("#" + name + "Form").show();
-		//document.getElementById(name + "Form").style.visibility = "hidden";
-	}else{
-		$("#" + name + "Form").hide();
-		//document.getElementById(name + "Form").style.visibility = "visible";
-	}
-
-}
-</script>
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

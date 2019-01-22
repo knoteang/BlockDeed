@@ -405,9 +405,8 @@ var abiArray = [
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0x2E98192d84E0a60B9692cB311529e252a7f1C14d';
+var contractAddress = '0xd93863e301DE285bC091Af7565b69d5927c66cFC';
 var contractInstance = contract.at(contractAddress);
-var acc = "";
 
 function sendDocument(){
   var section = document.getElementById('Csection').value ;
@@ -556,14 +555,12 @@ function sendDocument(){
         }
       });
     }
-
     function login(){
       var user = document.getElementById('userH').value ;
       var pass = document.getElementById('pwordH').value ;
-      if (user == 1 && pass == 1) {
-        alert(1);
-        acc = 1;
+      if (user == "0x5f4fe601df76e906854fb3547b0bd6a8d2be00e4") {
+        document.location.href = "file:///C:/Users/Swiss/Desktop/test/html/createDeed.html";
       }else{
-        acc = 2;
+        document.location.href = "file:///C:/Users/Swiss/Desktop/test/html/getDeed2.html";
       }
     }
