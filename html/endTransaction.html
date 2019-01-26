@@ -13,32 +13,26 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item">
-	        <a class="nav-link" href="createDeed.html">Create Deed<span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="getDeed.html">Get Deed</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="saveTransaction.html">Save Transaction</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="endTransaction.html">End Transaction</a>
-	      </li>	 
-	      <li class="nav-item">
-	        <a class="nav-link" href="getTransaction.html">Get Transaction</a>
-	      </li>	 
-	      <li class="nav-item">
-	        <a class="nav-link" href="checkContract.html">Check Contract</a>
-	      </li>	      
-	    </ul>
-	  </div>
+		<a class="navbar-brand text-white" style="font-size: 25px;">Deed</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<!-- <li class="nav-item" id="createLi">
+					<a class="nav-link" href="createDeed.html">สร้างโฉนดที่ดิน<span class="sr-only">(current)</span></a>
+				</li> -->
+				<li class="nav-item" id="getDeedLi">
+					<a class="nav-link" href="getDeed2.html">เรียกดูโฉนดที่ดิน</a>
+				</li>
+				<li class="nav-item" id="saveTransactionLi">
+					<a class="nav-link" href="saveTransaction2.html">บันทึกธุรกรรม</a>
+				</li>
+				<li class="nav-item" id="getTransactionLi">
+					<a class="nav-link" href="getTransaction2.html">เรียกดูธุรกรรม</a>
+				</li>
+			</ul>
+		</div>
 	</nav>
 	<br>
 	<div class="container-fluid">
@@ -47,7 +41,7 @@
 				<form>
 				 	<div class="form-group col-md-11"><br><h2>End Transaction</h2></div>
 					 <div class="form-row justify-content-center">
-					   
+
 					    <div class="col-md-5 my-1">
 					      <div class="input-group">
 					        <div class="input-group-prepend">
@@ -56,7 +50,7 @@
 					        <input type="text" class="form-control" id="transactionNumber" placeholder="Transaction Number">
 					      </div>
 					    </div>
-					
+
 					    <div class="form-group col-auto my-1">
 					      <button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">End Transaction</button>
 					    </div>
@@ -71,57 +65,74 @@
 					<div class="form-group justify-content-start bg-light">
 					 <div class="form-group container col-md-11"><h4>Transaction</h4></div>
 					  <div class="row justify-content-center">
-						<div class="col-md-10">							
+						<div class="col-md-10">
 							<div class="form-group container col-md-11">
 						  	  <label for="transactionNumber">Transaction Number</label>
 						      <input type="text" readonly class="form-control" id="transactionNumber" placeholder="Transaction Number">
-						    </div> 
+						    </div>
 						</div>
-						<div class="col-md-10">							
+						<div class="col-md-10">
 							<div class="form-group container col-md-11">
 								<label for="statusOfTransaction" style="color: green;">End Transaction</label>
-							</div>	
+							</div>
 						</div>
 					  </div>
-					</div>							
-				</form>		
+					</div>
+				</form>
 
 		</div>
 	</div>
 
 
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <form>
-		          <div class="form-group">
-		            <label for="username" class="col-form-label">Username:</label>
-		            <input type="text" class="form-control" id="username">
-		          </div>
-		          <div class="form-group">
-		            <label for="password" class="col-form-label">Password:</label>
-		            <input type="text" class="form-control" id="password">
-		          </div>
-		        </form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-		        <button type="button" id="login" class="btn btn-dark">Login</button>
-		      </div>
-		    </div>
-		  </div>
+	<div class="modal fade" id="exampleModalCenter" name="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Confirm transaction</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="username" class="col-form-label">Public key : เจ้าของโฉนด</label>
+							<input type="text" class="form-control" id="username">
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-form-label">Private key : เจ้าของโฉนด</label>
+							<input type="text" class="form-control" id="password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+					<button type="button" id="login" class="btn btn-dark" onclick="getDocument();">Confirm</button>
+				</div>
+			</div>
 		</div>
+	</div>
+
+	<div class="modal fade" id="transactionStatus" tabindex="-1" role="dialog" aria-labelledby="transactionSuccessCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="transactionSuccessCenterTitle">Transaction</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="text-success text-center" id="complete" style="font-size: 25px;">Transaction Complete</p>
+					<p class="text-danger text-center" id="fail" style="font-size: 25px;">Transaction Fail</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript">
 
 	    $(document).ready(function(){
@@ -129,7 +140,7 @@
 	        	$("#login").click(function() {
 	        	$("#closeModal").click();
 	        	$("#endTransaction").show();
-	           
+
 	        });
 	    });
 	</script>

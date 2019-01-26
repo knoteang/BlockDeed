@@ -17,38 +17,9 @@ function checkStatus(){
 * The code below is used for interaction with the smart contract
 */
 
-// Assign the account for action to smart contract
-web3.eth.defaultAccount = web3.eth.accounts[9];
 
 // The ABI of the contract
-var abiArray = [
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "allEndTransaction",
-    "outputs": [
-      {
-        "name": "traNo",
-        "type": "uint256"
-      },
-      {
-        "name": "status",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
+var abiArray =  [
   {
     "constant": true,
     "inputs": [
@@ -96,8 +67,8 @@ var abiArray = [
         "type": "string"
       },
       {
-        "name": "nationality",
-        "type": "string"
+        "name": "identificationNumber",
+        "type": "uint256"
       },
       {
         "name": "size",
@@ -145,6 +116,33 @@ var abiArray = [
       {
         "name": "detail",
         "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allEndTransaction",
+    "outputs": [
+      {
+        "name": "traNo",
+        "type": "uint256"
+      },
+      {
+        "name": "docNo",
+        "type": "uint256"
+      },
+      {
+        "name": "status",
+        "type": "bool"
       }
     ],
     "payable": false,
@@ -215,8 +213,8 @@ var abiArray = [
       },
       {
         "indexed": false,
-        "name": "nationality",
-        "type": "string"
+        "name": "identificationNumber",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -256,6 +254,11 @@ var abiArray = [
         "indexed": false,
         "name": "money",
         "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "name": "status",
+        "type": "bool[]"
       }
     ],
     "name": "print_transaction",
@@ -297,8 +300,8 @@ var abiArray = [
         "type": "string"
       },
       {
-        "name": "nationality",
-        "type": "string"
+        "name": "identificationNumber",
+        "type": "uint256"
       },
       {
         "name": "size",
@@ -381,20 +384,6 @@ var abiArray = [
         "type": "uint256"
       }
     ],
-    "name": "getLastTransaction",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_docNo",
-        "type": "uint256"
-      }
-    ],
     "name": "getTransaction",
     "outputs": [],
     "payable": false,
@@ -403,12 +392,16 @@ var abiArray = [
   }
 ];
 
+// Assign the account for action to smart contract
+web3.eth.defaultAccount = web3.eth.accounts[9];
+
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0xd93863e301DE285bC091Af7565b69d5927c66cFC';
+var contractAddress = '0x37F2C6154E1ab27c4c8e405204c30ab356FBcA7D';
 var contractInstance = contract.at(contractAddress);
 
 function sendDocument(){
+  unlockAccount();
   var section = document.getElementById('Csection').value ;
   var numberOfsection = document.getElementById('CnumberOfsection').value ;
   var district = document.getElementById('Cdistrict').value ;
@@ -506,9 +499,15 @@ function sendDocument(){
       //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
       contractInstance.endTransaction(noTran,function (error, result) {
         if (!error) {
-          console.log();
+          console.log(web3.eth.getTransaction(result));
+          $("#fail").hide();
+          $("#complete").show();
+          $("#transactionStatus").modal();
         }else{
           console.log(error);
+          $("#complete").hide();
+          $("#fail").show();
+          $("#transactionStatus").modal();
         }
       });
     }
@@ -545,7 +544,7 @@ function sendDocument(){
     }
 
     function checkContract(){
-      var noDoc = document.getElementById('docCheck').value ;
+      var noDoc = document.getElementById('docCheck').value;
       //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
       contractInstance.checkContract(noDoc,function (error, result) {
         if (!error) {
@@ -555,12 +554,19 @@ function sendDocument(){
         }
       });
     }
+
     function login(){
       var user = document.getElementById('userH').value ;
       var pass = document.getElementById('pwordH').value ;
-      if (user == "0x5f4fe601df76e906854fb3547b0bd6a8d2be00e4") {
+      if (user == "0x253002ff118887f9d79b8dbb863b2e831df46f1b") {
         document.location.href = "file:///C:/Users/Swiss/Desktop/test/html/createDeed.html";
       }else{
         document.location.href = "file:///C:/Users/Swiss/Desktop/test/html/getDeed2.html";
       }
+    }
+
+    function unlockAccount(){
+      web3.eth.defaultAccount = document.getElementById('username').value ;
+      alert(web3.eth.personal.unlockAccount(web3.eth.defaultAccount, document.getElementById('password').value, 1000));
+      //alert(document.getElementById('username').value)
     }

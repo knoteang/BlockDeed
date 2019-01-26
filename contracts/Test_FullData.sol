@@ -12,12 +12,15 @@ contract Test_FullData {
         string county,
         string province,
         string name,
-        string nationality,
+        uint identificationNumber,
         uint size);
     event print_arrayuint(uint[] array);
     event print_transaction(uint[] traNo,
         address[] mortgagee,
-        uint[] money);
+        uint[] money,
+        bool[] status);
+
+    uint private transactionNumber = 0;
 
     //โครงสร้างโฉนดที่ดิน(หน้าแรก)  ในทางปฏิบัติเลขที่โฉนดมันจะซ้ำตามอำเภอ ดังนั้นอาจจะมีการะบุkeyเพิ่ม
     struct document {
@@ -32,12 +35,13 @@ contract Test_FullData {
         string province; //จังหวัด
         //3.ระบุตัวเจ้าของ
         string name; // เอา frisname+lastname
-        string nationality; //สัญชาติ
+        uint identificationNumber; //สัญชาติ
         //4.ที่ดินนี้มีเนื้อแหลงขนาด
         uint size;
         //5.รูปส่วนแผนที่>รูปแผนที่ มาตราส่วน ตำแหน่งทิศ วันที่ออก ลงชื่อเจ้าพนักงานที่ดิน
     }
     mapping(address => document[]) public allDocument;
+
     //โครงสร้างโฉนดที่ดิน(หน้าหลัง)
     struct transaction {
         uint traNo;
@@ -50,15 +54,14 @@ contract Test_FullData {
     }
     mapping(uint => transaction[]) public allList;
 
-
-
     //โครงสร้างโฉนดที่ดิน(หน้าหลัง)
     struct endtransaction {
         uint traNo;
         //..other data
+        uint docNo; // เลขที่โฉนด
         bool status;
     }
-    mapping(uint => endtransaction[]) public allEndTransaction;
+    mapping(uint => endtransaction) public allEndTransaction;
 
     //ลงทะเบียนโฉนดที่ดินให้กับผู้ใช้
     function sendDocument(address id,
@@ -69,7 +72,7 @@ contract Test_FullData {
     string memory county,
     string memory province,
     string memory name,
-    string memory nationality,
+    uint identificationNumber,
     uint size) public {
         //authen by admin...
         //require
@@ -81,7 +84,7 @@ contract Test_FullData {
         county,
         province,
         name,
-        nationality,
+        identificationNumber,
         size);
         allDocument[id].push(newDocument);
     }
@@ -89,16 +92,12 @@ contract Test_FullData {
     //บันทึกธุรกรรมของโฉนดที่ดิน
     function saveTransaction(uint _docNo,address _mortgage,address _mortgagee,uint _money,string memory _datail) public {
         //require
+        //require(msg.sender == ธนาคาร);
         //ตรวจสอบความถูกต้อง
         //if(checkContract(_docNo)){
-        // uint _traNo=1;
-        // for(uint idx = 0; idx < allList.length; idx++){
-        //     _traNo=_traNo+allList[idx].length;
-        // }
-        transaction[] memory tmpTran = allList[_docNo];
-        uint _traNo = tmpTran.length; // แก้ไข ให้ไม่ติดบัค ****
-        transaction memory newTransaction = transaction(_traNo, _docNo,  _mortgage, _mortgagee, _money, _datail);
+        transaction memory newTransaction = transaction(transactionNumber, _docNo,  _mortgage, _mortgagee, _money, _datail);
         allList[_docNo].push(newTransaction);
+        transactionNumber+=1;
         //}else{
           //  emit print_string("fail");
         //}
@@ -106,15 +105,17 @@ contract Test_FullData {
     //ยกเลิกพันธะ
     function endTransaction(uint _docNo, uint _traNo) public {
         //require
+        //require(msg.sender == เลขธนาคาร);
         //ตรวจสอบความถูกต้อง
-        endtransaction memory newEndTransaction =  endtransaction(_traNo, true);
-        allEndTransaction[_docNo].push(newEndTransaction);
+        endtransaction memory newEndTransaction =  endtransaction(_docNo, _traNo, true);
+        allEndTransaction[_traNo] = newEndTransaction;
     }
     //แสดงรายละเอียดของโฉนด
     function getDocument(uint _docNo) public {
         //authen by user...
-        //require
         document[] memory tmpDoc = allDocument[msg.sender];
+        //require
+
         for(uint idx = 0; idx < tmpDoc.length; idx++){
             if(tmpDoc[idx].docNo==_docNo){
                 emit print_document(tmpDoc[idx].section,
@@ -124,34 +125,41 @@ contract Test_FullData {
                 tmpDoc[idx].county,
                 tmpDoc[idx].province,
                 tmpDoc[idx].name,
-                tmpDoc[idx].nationality,
+                tmpDoc[idx].identificationNumber,
                 tmpDoc[idx].size);
                 return;
             }
         }
     }
-    //แสดงธุรกรรมของโฉนด แสดงธุรกรรมสุดท้าย กำลังหาวิธีแสดงทั่งอาเรย์
-    function getLastTransaction(uint _docNo) public {
-        //authen by user...
-        //require
-        transaction[] memory tmpTran = allList[_docNo];
-        emit print_string(tmpTran[0].detail);
-        return;
-    }
-
+    //แสดงธุรกรรมของโฉนด
     function getTransaction(uint _docNo) public {
         //authen by user...
+        document[] memory tmpDoc = allDocument[msg.sender];
+        address docOwner;
+        for(uint idx = 0; idx < tmpDoc.length; idx++){
+            if(tmpDoc[idx].docNo==_docNo){
+                docOwner=tmpDoc[idx].id;
+            }
+        }
         //require
+        //require(docOwner == msg.sender);
+
         transaction[] memory tmpTran = allList[_docNo];
         uint[] memory traNo = new uint[](tmpTran.length);
         address[] memory mortgagee = new address[](tmpTran.length);
         uint[] memory money = new uint[](tmpTran.length);
+        bool[] memory status = new bool[](tmpTran.length);
         for(uint idx = 0; idx < tmpTran.length; idx++){
             traNo[idx] = tmpTran[idx].traNo;
             mortgagee[idx] = tmpTran[idx].mortgagee;
             money[idx] = tmpTran[idx].money;
+            if(allEndTransaction[tmpTran[idx].traNo].status){
+                status[idx] = true;
+            } else {
+                status[idx] = false;
+            }
         }
-        emit print_transaction(traNo,mortgagee,money);
+        emit print_transaction(traNo,mortgagee,money,status);
         return;
     }
 
@@ -160,14 +168,11 @@ contract Test_FullData {
         //authen by user...
         //require
         transaction[] memory tmpTran = allList[_docNo];
-        endtransaction[] memory tmpEndTran = allEndTransaction[_docNo];
         if(tmpTran.length==0){
             return true;
         } else {
-            for(uint idx = 0; idx < tmpEndTran.length; idx++){
-                if(tmpEndTran[idx].traNo==tmpTran[0].traNo){
-                    return true;
-                }
+            if(allEndTransaction[tmpTran[0].traNo].status){
+                return true;
             }
             return false;
         }
