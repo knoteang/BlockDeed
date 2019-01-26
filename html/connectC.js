@@ -461,7 +461,7 @@ function sendDocument(){
           var tmpName = result.args.name.split(" ");
           document.getElementById('Gfirstname').value = tmpName[0] ;
           document.getElementById('Glastname').value = tmpName[1] ;
-          document.getElementById('Gnationality').value = result.args.nationality ;
+          document.getElementById('Gnationality').value = result.args.identificationNumber ;
           document.getElementById('Gsize').value = result.args.size ;
         }else{
           console.log(error);
@@ -495,9 +495,10 @@ function sendDocument(){
     }
 
     function endTransaction(){
-      var noTran = document.getElementById('tranEnd').value ;
-      //document.getElementById('noDocGet').innerHTML = contractInstance.getDocument(addr);
-      contractInstance.endTransaction(noTran,function (error, result) {
+      var tranno = document.getElementById('transactionNumber').value ;
+      var deedno = document.getElementById('deedNumber').value ;
+
+      contractInstance.endTransaction(deedno,tranno,function (error, result) {
         if (!error) {
           console.log(web3.eth.getTransaction(result));
           $("#fail").hide();
@@ -534,7 +535,7 @@ function sendDocument(){
         if (!error) {
           console.log(result.args.traNo.length);
           for (i = 0; i < result.args.traNo.length; i++){
-            document.getElementById('insertValue').innerHTML = document.getElementById('insertValue').innerHTML + "<div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='transactionNumber'>หมายเลขธุรกรรม</label> <input type='text' readonly class='form-control' value='"+result.args.traNo[0]+"'> </div> <div class='form-group container col-md-5'> <label for='documentNumber'>เลขที่โฉนด</label> <input type='text' readonly class='form-control' ></div> <div class='form-group custom-switch col-md-1'> <input type='checkbox' class='custom-control-input' id='customSwitch"+i+"' onclick=\"customSwitchForm('customSwitch"+i+"');\"> <label class='custom-control-label' for='customSwitch"+i+"'></label> </div> </div> <div id='customSwitch"+i+"Form'> <div class='row justify-content-start'> <div class='form-group container col-md-11'><h4>รายละเอียด</h4></div> </div> <div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='nameGiver'>public key ผู้ให้สัญญา</label> <input type='text' readonly class='form-control' > </div> <div class='form-group container col-md-5'> <label for='nameReceiver'>public key ผู้รับสัญญา</label> <input type='text' readonly class='form-control' value='"+result.args.mortgagee[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateContract'>เงินจำนอง</label> <input type='text' readonly class='form-control'  value='"+result.args.money[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateRemain'>ข้อตกลงในสัญญา</label> <textarea readonly class='form-control'></textarea> </div> </div> </div><br>";
+            document.getElementById('insertValue').innerHTML = document.getElementById('insertValue').innerHTML + "<div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='transactionNumber'>หมายเลขธุรกรรม</label> <input type='text' readonly class='form-control' value='"+result.args.traNo[i]+"'> </div> <div class='form-group container col-md-5'> <label for='documentNumber'>สถานะธุรกรรม</label> <input type='text' readonly class='form-control' value='"+result.args.status[i]+"'></div> <div class='form-group custom-switch col-md-1'> <input type='checkbox' class='custom-control-input' id='customSwitch"+i+"' onclick=\"customSwitchForm('customSwitch"+i+"');\"> <label class='custom-control-label' for='customSwitch"+i+"'></label> </div> </div> <div id='customSwitch"+i+"Form'> <div class='row justify-content-start'> <div class='form-group container col-md-11'><h4>รายละเอียด</h4></div> </div> <div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='nameGiver'>public key ผู้ให้สัญญา</label> <input type='text' readonly class='form-control' > </div> <div class='form-group container col-md-5'> <label for='nameReceiver'>public key ผู้รับสัญญา</label> <input type='text' readonly class='form-control' value='"+result.args.mortgagee[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateContract'>เงินจำนอง</label> <input type='text' readonly class='form-control'  value='"+result.args.money[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateRemain'>ข้อตกลงในสัญญา</label> <textarea readonly class='form-control'></textarea> </div> </div> </div><br>";
             $("#" + "customSwitch" + i + "Form").hide();
           }
         }else{

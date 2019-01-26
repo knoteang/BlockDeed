@@ -39,45 +39,35 @@
 		<div class="container  bg-light">
 
 				<form>
-				 	<div class="form-group col-md-11"><br><h2>End Transaction</h2></div>
+				 	<div class="form-group col-md-11"><br><h2>สิ้นสุดภาระจำนอง</h2></div>
 					 <div class="form-row justify-content-center">
 
 					    <div class="col-md-5 my-1">
 					      <div class="input-group">
 					        <div class="input-group-prepend">
-					          <div class="input-group-text">Transaction Number</div>
+					          <div class="input-group-text">หมายเลขโฉนดที่ดิน</div>
 					        </div>
-					        <input type="text" class="form-control" id="transactionNumber" placeholder="Transaction Number">
+					        <input type="text" class="form-control" id="deedNumber" placeholder="">
+					      </div>
+					    </div>
+
+							<div class="col-md-5 my-1">
+					      <div class="input-group">
+					        <div class="input-group-prepend">
+					          <div class="input-group-text">หมายเลขธุรกรรม</div>
+					        </div>
+					        <input type="text" class="form-control" id="transactionNumber" placeholder="">
 					      </div>
 					    </div>
 
 					    <div class="form-group col-auto my-1">
-					      <button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">End Transaction</button>
+					      <button type="button" id="getTransaction" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">สิ้นสุดภาระจำนอง</button>
 					    </div>
 					    <div class="form-group container col-md-10"></div>
 					    <hr>
 
 					 </div>
 
-				</form>
-
-				<form id="endTransaction">
-					<div class="form-group justify-content-start bg-light">
-					 <div class="form-group container col-md-11"><h4>Transaction</h4></div>
-					  <div class="row justify-content-center">
-						<div class="col-md-10">
-							<div class="form-group container col-md-11">
-						  	  <label for="transactionNumber">Transaction Number</label>
-						      <input type="text" readonly class="form-control" id="transactionNumber" placeholder="Transaction Number">
-						    </div>
-						</div>
-						<div class="col-md-10">
-							<div class="form-group container col-md-11">
-								<label for="statusOfTransaction" style="color: green;">End Transaction</label>
-							</div>
-						</div>
-					  </div>
-					</div>
 				</form>
 
 		</div>
@@ -96,11 +86,11 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="username" class="col-form-label">Public key : เจ้าของโฉนด</label>
+							<label for="username" class="col-form-label">Public key : เจ้าหน้าที่ธนาคาร</label>
 							<input type="text" class="form-control" id="username">
 						</div>
 						<div class="form-group">
-							<label for="password" class="col-form-label">Private key : เจ้าของโฉนด</label>
+							<label for="password" class="col-form-label">Private key : เจ้าหน้าที่ธนาคาร</label>
 							<input type="text" class="form-control" id="password">
 						</div>
 					</form>
