@@ -397,11 +397,10 @@ web3.eth.defaultAccount = web3.eth.accounts[9];
 
 var contract = web3.eth.contract(abiArray);
 // The address of the contract
-var contractAddress = '0x37F2C6154E1ab27c4c8e405204c30ab356FBcA7D';
+var contractAddress = '0x9C655bfBE4878682D5dd335f13aBee746394A7aB';
 var contractInstance = contract.at(contractAddress);
 
 function sendDocument(){
-  unlockAccount();
   var section = document.getElementById('Csection').value ;
   var numberOfsection = document.getElementById('CnumberOfsection').value ;
   var district = document.getElementById('Cdistrict').value ;
@@ -533,7 +532,6 @@ function sendDocument(){
       });
       contractInstance.print_transaction(function (error, result) {
         if (!error) {
-          console.log(result.args.traNo.length);
           for (i = 0; i < result.args.traNo.length; i++){
             document.getElementById('insertValue').innerHTML = document.getElementById('insertValue').innerHTML + "<div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='transactionNumber'>หมายเลขธุรกรรม</label> <input type='text' readonly class='form-control' value='"+result.args.traNo[i]+"'> </div> <div class='form-group container col-md-5'> <label for='documentNumber'>สถานะธุรกรรม</label> <input type='text' readonly class='form-control' value='"+result.args.status[i]+"'></div> <div class='form-group custom-switch col-md-1'> <input type='checkbox' class='custom-control-input' id='customSwitch"+i+"' onclick=\"customSwitchForm('customSwitch"+i+"');\"> <label class='custom-control-label' for='customSwitch"+i+"'></label> </div> </div> <div id='customSwitch"+i+"Form'> <div class='row justify-content-start'> <div class='form-group container col-md-11'><h4>รายละเอียด</h4></div> </div> <div class='row justify-content-start'> <div class='form-group container col-md-5'> <label for='nameGiver'>public key ผู้ให้สัญญา</label> <input type='text' readonly class='form-control' > </div> <div class='form-group container col-md-5'> <label for='nameReceiver'>public key ผู้รับสัญญา</label> <input type='text' readonly class='form-control' value='"+result.args.mortgagee[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateContract'>เงินจำนอง</label> <input type='text' readonly class='form-control'  value='"+result.args.money[i]+"'> </div> <div class='form-group container col-md-5'> <label for='estateRemain'>ข้อตกลงในสัญญา</label> <textarea readonly class='form-control'></textarea> </div> </div> </div><br>";
             $("#" + "customSwitch" + i + "Form").hide();
